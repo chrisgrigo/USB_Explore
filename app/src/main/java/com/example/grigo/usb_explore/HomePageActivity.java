@@ -71,6 +71,7 @@ public class HomePageActivity extends AppCompatActivity
             @Override
             public void onClick(View v){
                 /*On Click open find pc*/
+                /*Run HomePageActivity*/
             }}
         );
 
