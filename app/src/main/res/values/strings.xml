@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">USB_Explore</string>
+    <string name="app_label">Staff Search</string>
+    <string name="search_hint">Enter the name of a member of staff..</string>
 </resources>
