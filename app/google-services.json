@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "584003714743",
+    "firebase_url": "https://office-finding-app-5fc98.firebaseio.com",
+    "project_id": "office-finding-app-5fc98",
+    "storage_bucket": "office-finding-app-5fc98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584003714743:android:7676605184ca1f90",
+        "android_client_info": {
+          "package_name": "com.example.grigo.usb_explore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584003714743-nnoag3fvh4h9876cudchbgsuk5rpv6vb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.grigo.usb_explore",
+            "certificate_hash": "65036722713b24e729ccbad1c5c90bb92043cab0"
+          }
+        },
+        {
+          "client_id": "584003714743-119oefkjsepiuq0irrioke5a7ovadqv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS30jBGmGb9UrB8KV6Xqhz8-YZcbQyxT8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584003714743-119oefkjsepiuq0irrioke5a7ovadqv8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584003714743:android:f7c766323d0016ba",
+        "android_client_info": {
+          "package_name": "com.example.work.searchapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584003714743-t6hg1kh8b8qj04uq15ben98n3cteop37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.work.searchapp",
+            "certificate_hash": "a3e51f2fed41187bae64b63560331eb0dbed52e9"
+          }
+        },
+        {
+          "client_id": "584003714743-119oefkjsepiuq0irrioke5a7ovadqv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS30jBGmGb9UrB8KV6Xqhz8-YZcbQyxT8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584003714743-119oefkjsepiuq0irrioke5a7ovadqv8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
