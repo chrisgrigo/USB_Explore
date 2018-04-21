@@ -1,50 +1,21 @@
 package com.example.grigo.usb_explore;
 
-import android.app.SearchManager;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.media.Image;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import java.util.HashMap;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 public class HomePageActivity extends AppCompatActivity
@@ -54,7 +25,8 @@ public class HomePageActivity extends AppCompatActivity
     ImageButton floor_maps;
     ImageButton staff_search;
     ImageButton venue_availability;
-    ImageButton find_a_pc;
+    ImageButton settings_button;
+    ImageButton help_button;
 
     HashMap<String, Integer> HashMapForLocalRes ;
     ImageButton floormaps, staffsearch, venue, findapc;
@@ -71,7 +43,8 @@ public class HomePageActivity extends AppCompatActivity
         floor_maps = (ImageButton)findViewById(R.id.floor_maps);
         staff_search = (ImageButton)findViewById(R.id.staff_search);
         venue_availability = (ImageButton)findViewById(R.id.venue_availability);
-        find_a_pc = (ImageButton)findViewById(R.id.find_a_pc);
+        settings_button = (ImageButton)findViewById(R.id.settings_button);
+        help_button = (ImageButton)  findViewById(R.id.help_button);
 
         floor_maps.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -96,11 +69,18 @@ public class HomePageActivity extends AppCompatActivity
             }}
         );
 
-        find_a_pc.setOnClickListener(new View.OnClickListener(){
+        settings_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                /*On Click open find pc*/
-                /*Run HomePageActivity*/
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+            }}
+        );
+
+        help_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                /*On Click open help*/
             }}
         );
 

@@ -87,15 +87,28 @@ tools:context="com.example.grigo.usb_explore.HomePageActivity">
     android:background="@color/black" />
 
     <ImageButton
-        android:id="@+id/find_a_pc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/settings_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_below="@id/SplitLine_hor2"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="25dp"
         android:padding="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/findpcpic" />
+        android:src="@drawable/settings_pic" />
+
+    <ImageButton
+        android:id="@+id/help_button"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@id/settings_button"
+        android:layout_below="@id/SplitLine_hor2"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="25dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/help3icon" />
 
 </RelativeLayout>
