@@ -43,6 +43,17 @@
                 android:value="com.example.grigo.usb_explore.HomePageActivity"/>
 
         </activity>
+
+        <activity
+            android:name=".HelpActivity"
+            android:label="HelpActivity"
+            android:parentActivityName=".HomePageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.grigo.usb_explore.HomePageActivity"/>
+
+        </activity>
+
     </application>
 
 </manifest>

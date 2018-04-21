@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -37,6 +38,9 @@ public class HomePageActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homeactivity_main);
+        Toolbar toolbar = findViewById(R.id.home_toolbar);
+        setSupportActionBar(toolbar);
+
 
         sliderLayout = (SliderLayout)findViewById(R.id.slider);
 
@@ -80,7 +84,8 @@ public class HomePageActivity extends AppCompatActivity
         help_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                /*On Click open help*/
+                Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+                startActivity(intent);
             }}
         );
 

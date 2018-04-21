@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#62def8">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Give us feedback/bugfix ticket:"
+        android:textStyle="normal"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="7dp"
+        android:ems="11"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/send_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText2"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="10dp"
+        android:text="Send"
+        android:textColor="@color/black"/>
+
+</RelativeLayout>
