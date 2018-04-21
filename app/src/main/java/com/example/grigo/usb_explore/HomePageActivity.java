@@ -2,7 +2,12 @@ package com.example.grigo.usb_explore;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +33,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -51,12 +58,6 @@ public class HomePageActivity extends AppCompatActivity
 
     HashMap<String, Integer> HashMapForLocalRes ;
     ImageButton floormaps, staffsearch, venue, findapc;
-
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference dbr = database.getInstance().getReference();
-    String message;
-    String[] list = {"Results will appear here"};
-    ArrayAdapter arrayAdapter;
 
 
 
@@ -82,59 +83,8 @@ public class HomePageActivity extends AppCompatActivity
         staff_search.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                setContentView(R.layout.search);
-                SearchView search = findViewById(R.id.searchView);
-                final ListView listView = findViewById(R.id.list_view);
-                arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list);
-                listView.setAdapter(arrayAdapter);
-                search.setActivated(true);
-                search.setQueryHint("Enter Staff Name or Room Number..");
-                search.onActionViewExpanded();
-                search.setIconified(false);
-                search.clearFocus();
-                search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        message = query;
-                        dbr.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for (int i = 0; i < 43; i++) {
-                                    try {
-                                        String lastName = dataSnapshot.child(Integer.toString(i)).child("Last Name").getValue(String.class);
-                                        String firstName = dataSnapshot.child(Integer.toString(i)).child("First Name").getValue(String.class);
-                                        String roomNo = dataSnapshot.child(Integer.toString(i)).child("Room Number").getValue(String.class);
-                                        String title = dataSnapshot.child(Integer.toString(i)).child("Title").getValue(String.class);
-                                        if (lastName.equalsIgnoreCase(message)) {
-                                            list[0] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                        } else if (firstName.equalsIgnoreCase(message)){
-                                            list[0] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                        } else if (roomNo.equalsIgnoreCase(message)){
-                                            list[0] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                        } else if ((firstName + " " + lastName).equalsIgnoreCase(message)){
-                                            list[0] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                        } else if ((title + " " + firstName + " " + lastName).equalsIgnoreCase(message)){
-                                            list[0] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                        }
-                                    } catch (Exception e) {
-
-                                    }
-                                }
-                            }
-                            public void onCancelled(DatabaseError er){
-                                list[0] = ("ERROR:" + er.toString());
-                            }
-                        });
-                        arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list);
-                        listView.setAdapter(arrayAdapter);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        return false;
-                    }
-                });
+                Intent intent = new Intent(getApplicationContext(), search.class);
+                startActivity(intent);
             }}
         );
 

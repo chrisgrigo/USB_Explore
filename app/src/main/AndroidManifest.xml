@@ -18,6 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".search"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".HomePageActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.grigo.usb_explore.HomePageActivity" />
+        </activity>
     </application>
 
 </manifest>
