@@ -53,7 +53,8 @@ public class HomePageActivity extends AppCompatActivity
         floor_maps.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                /*On Click open maps*/
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                startActivity(intent);
             }}
         );
 

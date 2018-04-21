@@ -1,7 +1,19 @@
 <resources>
-    <string name="app_name">USB Explore</string>
+    <string name="app_name">USB Explorer</string>
     <string name="app_label">Staff Search</string>
     <string name="search_hint">Enter the name of a member of staff..</string>
     <string name="title_activity_search">search</string>
     <string name="labs">Labs</string>
+
+    <string name="directions_to">Directions To</string>
+    <string name="go">Go</string>
+    <string name="cancel_directions_to">Cancel</string>
+    <string name="floor0">0</string>
+    <string name="floor1">1</string>
+    <string name="floor2">2</string>
+    <string name="floor3">3</string>
+    <string name="floor4">4</string>
+    <string name="floor5">5</string>
+    <string name="floor6">6</string>
+    <string name="disabled_access">Disabled Access</string>
 </resources>

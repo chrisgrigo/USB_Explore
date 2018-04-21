@@ -45,6 +45,16 @@
         </activity>
 
         <activity
+            android:name=".MapActivity"
+            android:label="MapActivity"
+            android:parentActivityName=".HomePageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.grigo.usb_explore.MapActivity"/>
+
+        </activity>
+
+        <activity
             android:name=".HelpActivity"
             android:label="HelpActivity"
             android:parentActivityName=".HomePageActivity">
