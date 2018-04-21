@@ -475,7 +475,7 @@ public class MapActivity extends AbstractFragmentsActivity {
         floorList.get(3).addNode(p314);
 
         // floor 4 nodes
-        Node p400 = new Node(new Coord(1397, 2887), 4);
+        Node p400 = new Node(new Coord(1397, 2730), 4);
         floorList.get(4).addNode(p400);
         Node p401 = new Node(new Coord(1397, 2314), 4);
         floorList.get(4).addNode(p401);
