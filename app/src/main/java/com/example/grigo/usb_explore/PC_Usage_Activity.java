@@ -1,9 +1,24 @@
 package com.example.grigo.usb_explore;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,96 +30,103 @@ import java.util.List;
 public class PC_Usage_Activity extends AppCompatActivity {
 
     private ExpandableListView listView;
-    private ExpandableListView listView2;
-
     private ExpandableListAdapter listAdapter;
-    private ExpandableListAdapter listAdapter2;
-
     private List<String> listDataHeader;
-    private List<String> listDataHeader2;
     private HashMap<String, List<String>> listHash;
-    private HashMap<String, List<String>> listHash2;
+
+    List<String> lvl2 = new ArrayList<>();
+    List<String> lvl3 = new ArrayList<>();
+    List<String> lvl4 = new ArrayList<>();
+    List<String> lvl5 = new ArrayList<>();
+
+    String JSONString = "";
+    private static String fileURL = "https://api.myjson.com/bins/qqx1f";
+    private final static int REFRESHINTERVAL = 1000 * 60 * 10; //10 minutes
+    Handler refreshHandler;
+    HandlerThread refreshHandlerThread;
+    Thread refreshHandlerTask = new Thread(new Runnable()
+    {
+        @Override
+        public void run() {
+            Boolean check = false;
+            try {
+                JSONString = "";
+                URL url = new URL(fileURL);
+                BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+                String line = br.readLine();
+                JSONString = line;
+                check = true;
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }catch (IOException ioe){
+                ioe.printStackTrace();
+            }
+            if(check) {
+                try {
+                    lvl2 = new ArrayList<>();
+                    lvl3 = new ArrayList<>();
+                    lvl4 = new ArrayList<>();
+                    lvl5 = new ArrayList<>();
+                    JSONObject obj = new JSONObject(JSONString);
+                    JSONArray summary = obj.getJSONArray("usb_location_summary");
+                    for (int roomNo = 0; roomNo < summary.length(); roomNo++){
+                        JSONObject room = summary.getJSONObject(roomNo);
+                        addRoomInfo(roomNo, room);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            refreshHandler.postDelayed(refreshHandlerTask, REFRESHINTERVAL);
+        }
+    });
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pc_usage_layout);
-
-        listView = (ExpandableListView) findViewById(R.id.lvExp);
-        listView2 = (ExpandableListView) findViewById(R.id.lvExp2);
-        initData();
-        initData2();
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
-        listAdapter2 = new ExpandableListAdapter(this,listDataHeader2,listHash2);
-        listView.setAdapter(listAdapter);
-        listView2.setAdapter(listAdapter2);
-    }
-
-    private void initData(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.usageToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Venue Availability");
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
-
+        listDataHeader.add("Level 2");
         listDataHeader.add("Level 3");
         listDataHeader.add("Level 4");
         listDataHeader.add("Level 5");
+        listView = (ExpandableListView) findViewById(R.id.lvExp);
+        refreshHandlerThread = new HandlerThread("RefreshThread");
+        refreshHandlerThread.start();
+        refreshHandler = new Handler(refreshHandlerThread.getLooper());
+        refreshHandlerTask.start();
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
+        listView.setAdapter(listAdapter);
+        Log.d("CRAZY", (String.valueOf(listAdapter.getGroupCount())));
+}
 
-        List<String> lvl3 = new ArrayList<>();
-        lvl3.add("3.001");
-        lvl3.add("3.002");
 
-        List<String> lvl4 = new ArrayList<>();
-        lvl4.add("4.001");
-        lvl4.add("4.002");
+    private void addRoomInfo(int roomNo, JSONObject room){
+        try {
+            String name = room.getString("location_name");
+            String usablePC = room.getString("location_free") + " / " + room.getString("location_total") + " PCs Available";
+            if (roomNo == 0){
+                lvl2.add(name + " - " + usablePC);
+            } else if (roomNo < 5){
+                lvl3.add(name + " - " + usablePC);
+            } else if (roomNo < 9){
+                lvl4.add(name + " - " + usablePC);
+            } else {
+                lvl5.add(name + " - " + usablePC);
+            }
+            listHash.put(listDataHeader.get(0),lvl2);
+            listHash.put(listDataHeader.get(1),lvl3);
+            listHash.put(listDataHeader.get(2),lvl4);
+            listHash.put(listDataHeader.get(3),lvl5);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        List<String> lvl5 = new ArrayList<>();
-        lvl5.add("5.001");
-        lvl5.add("5.002");
-        lvl5.add("5.003");
-        lvl5.add("5.004");
-
-        listHash.put(listDataHeader.get(0),lvl3);
-        listHash.put(listDataHeader.get(1),lvl4);
-        listHash.put(listDataHeader.get(2),lvl5);
     }
 
-    private void initData2(){
-        listDataHeader2 = new ArrayList<>();
-        listHash2 = new HashMap<>();
-
-        listDataHeader2.add("Level 1");
-        listDataHeader2.add("Level 2");
-        listDataHeader2.add("Level 3");
-        listDataHeader2.add("Level 4");
-        listDataHeader2.add("Level 5");
-
-        List<String> lvl1 = new ArrayList<>();
-        lvl1.add("1.001");
-        lvl1.add("1.002");
-
-        List<String> lvl2 = new ArrayList<>();
-        lvl2.add("2.001");
-        lvl2.add("2.002");
-
-        List<String> lvl3 = new ArrayList<>();
-        lvl3.add("3.001");
-        lvl3.add("3.002");
-        lvl3.add("3.003");
-        lvl3.add("3.004");
-
-        List<String> lvl4 = new ArrayList<>();
-        lvl4.add("4.001");
-        lvl4.add("4.002");
-        lvl4.add("4.003");
-        lvl4.add("4.004");
-
-        List<String> lvl5 = new ArrayList<>();
-        lvl5.add("5.001");
-        lvl5.add("5.002");
-        lvl5.add("5.003");
-
-        listHash2.put(listDataHeader2.get(0),lvl1);
-        listHash2.put(listDataHeader2.get(1),lvl2);
-        listHash2.put(listDataHeader2.get(2),lvl3);
-        listHash2.put(listDataHeader2.get(3),lvl4);
-        listHash2.put(listDataHeader2.get(4),lvl5);
-    }
 }

@@ -41,18 +41,18 @@ tools:context="com.example.grigo.usb_explore.HomePageActivity">
     android:src="@drawable/floormaps"
     tools:ignore="MissingConstraints" />
 
-<ImageButton
-    android:id="@+id/staff_search"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="5dp"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
-    android:padding="0dp"
-    android:scaleType="fitXY"
-    android:layout_below="@id/floor_maps"
-    android:src="@drawable/staffpic" />
+    <ImageButton
+        android:id="@+id/staff_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/floor_maps"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/staffpic" />
 
 <View
     android:id="@+id/SplitLine_hor1"
@@ -63,18 +63,18 @@ tools:context="com.example.grigo.usb_explore.HomePageActivity">
     android:layout_marginBottom="-20dp"
     android:background="@color/black" />
 
-<ImageButton
-    android:id="@+id/venue_availability"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_marginTop="25dp"
-    android:layout_marginBottom="25dp"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
-    android:padding="0dp"
-    android:scaleType="fitXY"
-    android:layout_below="@id/SplitLine_hor1"
-    android:src="@drawable/venuepic" />
+    <ImageButton
+        android:id="@+id/venue_availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SplitLine_hor1"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="25dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/venuepic" />
 
 <View
     android:id="@+id/SplitLine_hor2"
@@ -86,16 +86,16 @@ tools:context="com.example.grigo.usb_explore.HomePageActivity">
     android:layout_marginBottom="-20dp"
     android:background="@color/black" />
 
-<ImageButton
-    android:id="@+id/find_a_pc"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_marginTop="25dp"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
-    android:padding="0dp"
-    android:scaleType="fitXY"
-    android:layout_below="@id/SplitLine_hor2"
-    android:src="@drawable/findpcpic" />
+    <ImageButton
+        android:id="@+id/find_a_pc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SplitLine_hor2"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="25dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/findpcpic" />
 
 </RelativeLayout>

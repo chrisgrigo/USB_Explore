@@ -3,4 +3,5 @@
     <string name="app_label">Staff Search</string>
     <string name="search_hint">Enter the name of a member of staff..</string>
     <string name="title_activity_search">search</string>
+    <string name="labs">Labs</string>
 </resources>

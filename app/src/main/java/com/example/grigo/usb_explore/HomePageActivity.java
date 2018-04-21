@@ -91,7 +91,8 @@ public class HomePageActivity extends AppCompatActivity
         venue_availability.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                /*On Click open staff_search*/
+                Intent intent = new Intent(getApplicationContext(), PC_Usage_Activity.class);
+                startActivity(intent);
             }}
         );
 
