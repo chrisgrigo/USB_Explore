@@ -59,9 +59,22 @@ public class HelpActivity extends AppCompatActivity {
         listDataHeader_Help2.add("About");
 
         /*CONTENT HERE*/
-        faqList2.add("Frequently asked questions here");
-        termsList2.add("Terms and conditions to be placed here");
-        aboutList2.add("About is placed here");
+        faqList2.add("\"What can this app be used for?\" \r\n\"" +
+                "This application is essentially a mobile guide around the Urban Sciences Building (USB) owned by Newcastle University." +
+                " It allows you to look at all floors of the building on an interactive map. You can find directions from any 2 rooms of your choice," +
+                " search for \nstaff rooms, and even find available PCs in the building which updates with live statistics every 10 minutes!\"\n\n" +
+                " \"What can i do if i find a bug?\" \"If a bug is found, please navigate to the \"help\" section found on the home page. " +
+                "There, that will take you to a page which allows you to submit a query. " +
+                "Notate the issue and how you caused it to occur, and we will work as quick as we can to fix it.\"\r\n\n" +
+                "\"Where can i find information about different rooms?\" \r\n " +
+                "\"Navigate to the map via the home page, and click on any room on the map which will cause a small \"i\" icon to appear. " +
+                "Click on this, \nand information about the selected room will pop up.\"\r\n"
+        );
+        termsList2.add("Terms and conditions, as may be amended from time to time, \n" +
+        "apply to all of our services. By accessing our application you acknowledge and agree with our Terms and Conditions. \n" +
+        "As our application is uploaded to Google Play it follows that user should have read and agree with Google Play Terms of Service: \n" +
+                "https://play.google.com/intl/en-us_us/about/play-terms.html");
+        aboutList2.add("This application was made by a second year computer  \nscience team for a project as part of the course");
 
         listHash_Help2.put(listDataHeader_Help2.get(0),faqList2);
         listHash_Help2.put(listDataHeader_Help2.get(1),termsList2);
@@ -91,6 +104,8 @@ public class HelpActivity extends AppCompatActivity {
 
         // show the popup window
         popupWindow.showAtLocation(mainLayout, Gravity.TOP, 0, 237);
+
+
 
         // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
