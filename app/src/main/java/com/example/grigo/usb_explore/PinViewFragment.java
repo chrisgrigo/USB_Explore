@@ -233,10 +233,12 @@ public class PinViewFragment extends Fragment {
 
 
 
+        // DEBUGGING (DELETE AFTER)
         btnDisabledAccess = rootView.findViewById(id.btnDisabledAccess);
         btnDisabledAccess.setOnClickListener((View view) -> {
-            Toast.makeText(getContext(), String.valueOf(getPinIdx("Snack Bar", 0)),
-                    Toast.LENGTH_LONG).show(); // DEBUGGING
+            //Toast.makeText(getContext(), String.valueOf(getPinIdx("2.042", 2)),
+                    //Toast.LENGTH_LONG).show();
+            setPin("2.042", 15);
 
         });
     }
