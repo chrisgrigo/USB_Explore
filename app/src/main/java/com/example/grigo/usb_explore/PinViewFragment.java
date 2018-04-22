@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -229,13 +230,19 @@ public class PinViewFragment extends Fragment {
             }
         });
 
+
+
+
         btnDisabledAccess = rootView.findViewById(id.btnDisabledAccess);
         btnDisabledAccess.setOnClickListener((View view) -> {
-
-
+            Toast.makeText(getContext(), String.valueOf(getPinIdx("Snack Bar", 0)),
+                    Toast.LENGTH_LONG).show(); // DEBUGGING
 
         });
     }
+
+
+
 
     public void pinSetup() {
         if (pinFromFloorNum == floorNum) { // if pin from floor number is current floor number
