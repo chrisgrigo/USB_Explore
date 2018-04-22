@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:text="Give us feedback/bugfix ticket:"
+        android:text="Send us feedback/issues"
         android:textStyle="normal"
         android:textAllCaps="false"
         android:textColor="@color/black"

@@ -1,6 +1,7 @@
 package com.example.grigo.usb_explore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -15,9 +16,12 @@ import android.widget.PopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -65,7 +69,7 @@ public class HelpActivity extends AppCompatActivity {
                 " It allows you to look at all floors of the building on an interactive map. You can find directions from any 2 rooms of your choice," +
                 " search for \nstaff rooms, and even find available PCs in the building which updates with live statistics every 10 minutes!\"\n\n" +
                 " \"What can i do if i find a bug?\" \"If a bug is found, please navigate to the \"help\" section found on the home page. " +
-                "There, that will take you to a page which allows you to submit a query. " +
+                "Click on the \"Send Feedback\" button at the top right, which will open a popup window that allows you to submit a query. " +
                 "Notate the issue and how you caused it to occur, and we will work as quick as we can to fix it.\"\r\n\n" +
                 "\"Where can i find information about different rooms?\" \r\n " +
                 "\"Navigate to the map via the home page, and click on any room on the map which will cause a small \"i\" icon to appear. " +
@@ -114,5 +118,33 @@ public class HelpActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        // when send button pressed
+        Button sendFeedback = popupView.findViewById(R.id.send_button);
+        sendFeedback.setOnClickListener((View v) -> {
+
+
+            // HERE
+            String feedback = "HELLO";
+            sendFeedback(feedback);
+            popupWindow.dismiss();
+
+
+            Toast.makeText(this, "Please click on your email client",
+                    Toast.LENGTH_LONG).show();
+        });
+
+    }
+
+    public void sendFeedback(String feedback) {
+        String[] to = new String[] {"usbexplorerapp@gmail.com"};
+        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String subject = "Feedback (" + date + ")";
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, feedback);
+        emailIntent.setType("plain/text");
+        startActivity(Intent.createChooser(emailIntent, "Send Feedback"));
     }
 }
