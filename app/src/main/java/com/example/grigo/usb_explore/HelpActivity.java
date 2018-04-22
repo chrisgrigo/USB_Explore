@@ -7,10 +7,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,8 +41,6 @@ public class HelpActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Help");
-
-
 
 
 
@@ -104,8 +105,6 @@ public class HelpActivity extends AppCompatActivity {
 
         // show the popup window
         popupWindow.showAtLocation(mainLayout, Gravity.TOP, 0, 237);
-
-
 
         // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
