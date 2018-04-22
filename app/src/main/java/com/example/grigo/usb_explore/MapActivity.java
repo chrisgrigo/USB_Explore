@@ -58,6 +58,7 @@ public class MapActivity extends AbstractFragmentsActivity {
             String level = getIntent().getStringExtra("LEVEL");
             Log.d("CAUTION", "Room Number: " + roomNo + " Level: " + Integer.parseInt(level));
             int idx = pvf.getPinIdx(roomNo, Integer.parseInt(level));
+            Log.d("CAUTION", Integer.toString(idx));
             pvf.setPin(roomNo, idx);
         } catch (Exception e){
             Log.d("CAUTION", "THERES AN ERROR: " + e.toString());
