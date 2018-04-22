@@ -304,11 +304,12 @@ public class PinViewFragment extends Fragment {
         }
     }
 
-    public int getPinIdx(String roomName, int floorNum) {
-        OptionalInt indexOpt = IntStream.range(0, MapActivity.floorList.get(floorNum).getRoomsList().size())
-                .filter(i -> MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName().equals(roomName))
+    public int getPinIdx(String roomName, int floorNumber) {
+        OptionalInt indexOpt = IntStream.range(0, MapActivity.floorList.get(floorNumber).getRoomsList().size())
+                .filter(i -> MapActivity.floorList.get(floorNumber).getRoomsList().get(i).getRoomName().equals(roomName))
                 .findFirst();
         if (indexOpt.isPresent()) {
+            floorNum = floorNumber;
             return indexOpt.getAsInt();
         } else {
             return -1;
