@@ -1,11 +1,13 @@
 package com.example.grigo.usb_explore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -18,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class search extends AppCompatActivity{
 
@@ -27,6 +30,8 @@ public class search extends AppCompatActivity{
         int numberOfRooms = 43;
         String[] list = new String[numberOfRooms];
         ArrayAdapter arrayAdapter;
+        String roomNo = "";
+        String level = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +65,9 @@ public class search extends AppCompatActivity{
                             try {
                                 String lastName = dataSnapshot.child(Integer.toString(i)).child("Last Name").getValue(String.class);
                                 String firstName = dataSnapshot.child(Integer.toString(i)).child("First Name").getValue(String.class);
-                                String roomNo = dataSnapshot.child(Integer.toString(i)).child("Room Number").getValue(String.class);
+                                roomNo = dataSnapshot.child(Integer.toString(i)).child("Room Number").getValue(String.class);
                                 String title = dataSnapshot.child(Integer.toString(i)).child("Title").getValue(String.class);
+                                level = dataSnapshot.child(Integer.toString(i)).child("Level").getValue(String.class);
                                 if (lastName.equalsIgnoreCase(message)) {
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
                                     count = count + 1;
@@ -71,6 +77,9 @@ public class search extends AppCompatActivity{
                                     count = count + 1;
                                     break;
                                 } else if (roomNo.equalsIgnoreCase(message)){
+                                    if (roomNo.equals("null")){
+                                        list[count] = (title + " " + firstName + " " + lastName + "'s room is on level " + level + "\n");
+                                    }
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
                                     count = count + 1;
                                     break;
@@ -84,14 +93,14 @@ public class search extends AppCompatActivity{
                                     break;
                                 }
                             } catch (Exception e) {
-                                list[0] = "ERROR: " + e.toString();
+                                list[0] = "Staff Member or Room not found!";
                             }
                         }
                         ArrayAdapter arrayAdapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list);
                         listView.setAdapter(arrayAdapter2);
                     }
                     public void onCancelled(DatabaseError er){
-                        list[0] = ("ERROR:" + er.toString());
+                        list[0] = ("No internet connection available!");
                     }
                 });
                 return false;
@@ -100,6 +109,18 @@ public class search extends AppCompatActivity{
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+
+        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if ((!(roomNo.equals(""))) && (!(level.equals("")))){
+                    Intent intent = new Intent(getBaseContext(), MapActivity.class);
+                    intent.putExtra("ROOM_NUMBER", roomNo);
+                    intent.putExtra("LEVEL", level);
+                    startActivity(intent);
+                }
             }
         });
 
