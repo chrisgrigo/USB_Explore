@@ -13,15 +13,11 @@
 
     <string-array name="pref_example_list_titles2">
         <item>Off</item>
-        <item>Deuteranopia</item>
-        <item>Tritanopia</item>
-        <item>Monochromacy</item>
+        <item>On</item>
     </string-array>
     <string-array name="pref_example_list_values2">
         <item>-1</item>
         <item>0</item>
-        <item>1</item>
-        <item>2</item>
     </string-array>
 
     <!-- Strings for Help -->

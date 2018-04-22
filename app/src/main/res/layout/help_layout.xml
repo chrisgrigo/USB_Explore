@@ -23,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onButtonFeedbackClick"
-        android:text="Feedback"
-        android:textAlignment="viewStart"
+        android:text="Send Feedback"
+        android:textAlignment="viewEnd"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="12sp" />
