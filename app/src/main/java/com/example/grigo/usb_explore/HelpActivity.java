@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -121,11 +122,15 @@ public class HelpActivity extends AppCompatActivity {
 
         // when send button pressed
         Button sendFeedback = popupView.findViewById(R.id.send_button);
+        //Edit Text Element declared
+        EditText emailText = popupView.findViewById(R.id.editText2);
+
         sendFeedback.setOnClickListener((View v) -> {
 
 
+
             // HERE
-            String feedback = "HELLO";
+            String feedback = emailText.getText().toString();
             sendFeedback(feedback);
             popupWindow.dismiss();
 
