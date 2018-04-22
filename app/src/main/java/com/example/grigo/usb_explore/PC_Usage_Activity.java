@@ -1,12 +1,16 @@
 package com.example.grigo.usb_explore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -102,7 +106,28 @@ public class PC_Usage_Activity extends AppCompatActivity {
         refreshHandlerTask.start();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
         listView.setAdapter(listAdapter);
-        Log.d("CRAZY", (String.valueOf(listAdapter.getGroupCount())));
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            String roomNo = "";
+            int level = Integer.parseInt(listDataHeader.get(position));
+            switch (level) {
+                case 2:
+                    roomNo = lvl2.get(position);
+                    break;
+                case 3:
+                    roomNo = lvl3.get(position - 1);
+                    break;
+                case 4:
+                    roomNo = lvl3.get(position - 5);
+                    break;
+                case 5:
+                    roomNo = lvl3.get(position - 9);
+                    break;
+            }
+            Intent intent = new Intent(getBaseContext(), MapActivity.class);
+            intent.putExtra("ROOM_NUMBER", roomNo);
+            intent.putExtra("LEVEL", level);
+            startActivity(intent);
+        });
 }
 
 
@@ -128,5 +153,7 @@ public class PC_Usage_Activity extends AppCompatActivity {
         }
 
     }
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.grigo.usb_explore;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class MapActivity extends AbstractFragmentsActivity {
                     .replace(id.frame, PinViewFragment.class.newInstance())
                     .commit();
         } catch (Exception e) {
+            Log.d("CAUTION", e.getMessage());
         }
     }
 
@@ -44,22 +46,16 @@ public class MapActivity extends AbstractFragmentsActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         floorSetup();
-        goToRoom();
+        //goToRoom();
+
     }
 
     private void goToRoom(){
         try {
-            PinViewFragment pvf = new PinViewFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(id.frame, pvf)
-                    .commit();
             String roomNo = getIntent().getStringExtra("ROOM_NUMBER");
-            String level = getIntent().getStringExtra("LEVEL");
-            Log.d("CAUTION", "Room Number: " + roomNo + " Level: " + Integer.parseInt(level));
-            int idx = pvf.getPinIdx(roomNo, Integer.parseInt(level));
-            Log.d("CAUTION", Integer.toString(idx));
-            pvf.setPin(roomNo, idx);
+            int level = Integer.parseInt(getIntent().getStringExtra("LEVEL"));
+            Log.d("CAUTION", getSupportFragmentManager().findFragmentById(id.frame).toString());
+            //setPinNoIdx(roomNo, level);
         } catch (Exception e){
             Log.d("CAUTION", "THERES AN ERROR: " + e.toString());
         }

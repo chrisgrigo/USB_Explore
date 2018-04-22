@@ -62,6 +62,8 @@ public class PinViewFragment extends Fragment {
 
         rootView = inflater.inflate(layout.pin_view_fragment, container, false);
 
+
+
         mapSetup(); // sets up the map
         buttonSetup(); // sets up all the buttons
         pinSetup(); // sets up the pins for that floor
@@ -72,6 +74,14 @@ public class PinViewFragment extends Fragment {
                 return gestureDetector.onTouchEvent(motionEvent);
             }
         });
+
+        try {
+            String roomNo = getActivity().getIntent().getStringExtra("ROOM_NUMBER");
+            int level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
+            setPinNoIdx(roomNo, level);
+        } catch (Exception e){
+
+        }
 
         return rootView;
     }
@@ -230,17 +240,6 @@ public class PinViewFragment extends Fragment {
             }
         });
 
-
-
-
-        // DEBUGGING (DELETE AFTER)
-        btnDisabledAccess = rootView.findViewById(id.btnDisabledAccess);
-        btnDisabledAccess.setOnClickListener((View view) -> {
-            //Toast.makeText(getContext(), String.valueOf(getPinIdx("2.042", 2)),
-                    //Toast.LENGTH_LONG).show();
-            setPin("2.042", 15);
-
-        });
     }
 
 
@@ -282,6 +281,7 @@ public class PinViewFragment extends Fragment {
         PointF pointF1 = new PointF((float)MapActivity.floorList.get(floorNum).getRoomsList().get(idx).getPinLocation().getX(),
                 (float)MapActivity.floorList.get(floorNum).getRoomsList().get(idx).getPinLocation().getY());
 
+
         if (!directionsToEnabled) { // only one pin on the map
             mapView.setPin(pointF1, "PIN FROM"); // sets the pin
             btnDirectionsTo.setVisibility(View.VISIBLE); // makes directions to button visible
@@ -304,15 +304,18 @@ public class PinViewFragment extends Fragment {
         }
     }
 
-    public int getPinIdx(String roomName, int floorNumber) {
+
+    public void setPinNoIdx(String roomName, int floorNumber) {
         OptionalInt indexOpt = IntStream.range(0, MapActivity.floorList.get(floorNumber).getRoomsList().size())
                 .filter(i -> MapActivity.floorList.get(floorNumber).getRoomsList().get(i).getRoomName().equals(roomName))
                 .findFirst();
         if (indexOpt.isPresent()) {
-            floorNum = floorNumber;
-            return indexOpt.getAsInt();
-        } else {
-            return -1;
+            if (floorNum != floorNumber) {
+                floorNum = floorNumber;
+                updateMap();
+            } else {
+                setPin(roomName, indexOpt.getAsInt());
+            }
         }
     }
 
