@@ -218,6 +218,15 @@ public class PinViewFragment extends Fragment {
         ImageView keyImage = rootView.findViewById(id.key);
         keyImage.setImageResource(0);
 
+
+
+
+        
+
+
+
+
+
         // colour blind mode (or not) setup
         if (colourBlindMode) {
             mapView.setImage(ImageSource.asset(colourBlindMaps[floorNum]));
