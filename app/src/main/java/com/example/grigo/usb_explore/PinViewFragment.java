@@ -265,6 +265,16 @@ public class PinViewFragment extends Fragment {
 
 
 
+        colourBlindMode = false;
+
+
+
+
+
+
+
+        
+
 
         // colour blind mode (or not) setup
         if (colourBlindMode) {
