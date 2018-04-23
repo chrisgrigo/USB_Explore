@@ -184,7 +184,7 @@ public class PinViewFragment extends Fragment {
                     String occupier = rooms.getJSONObject(x).getString("Occupier");
                     HashMap<String, String> yesno = new HashMap();
                     yesno.put("Screen", rooms.getJSONObject(x).getString("Contains screen"));
-                    yesno.put("is Contained",rooms.getJSONObject(x).getString("Contained?"));
+                    //yesno.put("is Contained",rooms.getJSONObject(x).getString("Contained?"));
                     yesno.put("Socket",rooms.getJSONObject(x).getString("Socket?"));
                     yesno.put("Disabled Access",rooms.getJSONObject(x).getString("Disabled?"));
                     yesno.put("GN",rooms.getJSONObject(x).getString("GN?"));
