@@ -67,6 +67,7 @@ public class PinViewFragment extends Fragment {
     String[] colourBlindMaps = {"floor0CB.jpg", "floor1CB.jpg","floor2CB.jpg","floor3CB.jpg","floor4CB.jpg","floor5CB.jpg","floor6CB.jpg"};
     static boolean colourBlindMode;
 
+    Button btnColourBlindMode;
     Button btnFloor0;
     Button btnFloor1;
     Button btnFloor2;
@@ -99,21 +100,19 @@ public class PinViewFragment extends Fragment {
         });
 
         try {
-            // get data from intent
             roomNo = getActivity().getIntent().getStringExtra("ROOM_NUMBER");
             level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
             btnCancelDirectionsTo.performClick();
 
             floorNum = 0;
             updateMap();
-            // update the map to be the right level and place pin
+
             if (level != -1){
                 setPinNoIdx(roomNo, level);
             }
-            // remove data from intent
+
             getActivity().getIntent().removeExtra("ROOM_NUMBER");
             getActivity().getIntent().removeExtra("LEVEL");
-            // reset variables
             roomNo = "";
             level = -1;
             updateMap();
@@ -157,14 +156,14 @@ public class PinViewFragment extends Fragment {
         }
     });
 
-    public void loadJSON() { //loads json from assets
+    public void loadJSON() {
         try {
-            InputStream is = getActivity().getAssets().open("JSONS/roominfo.json"); // load file
+            InputStream is = getActivity().getAssets().open("JSONS/roominfo.json");
             int size = is.available();
             byte[] buffer = new byte[size];
-            is.read(buffer); // read file into buffer
-            is.close(); // close file
-            jsonString = new String(buffer, "UTF-8"); // create string from buffer values
+            is.read(buffer);
+            is.close();
+            jsonString = new String(buffer, "UTF-8");
         } catch (IOException ex) {
             Log.d("FROG", "JSON LOAD NOT WORKING");
         }
@@ -172,24 +171,17 @@ public class PinViewFragment extends Fragment {
 
 
     public void displayInfo(String roomName){
-        // load json
         loadJSON();
-        // set initial string to contain roomname
-        String info = "Room Number: " + roomName + "\n";
+        String info = "";
         try {
-            // parse object
             JSONObject obj = new JSONObject(jsonString);
-            // parse rooms from object
             JSONArray rooms = obj.getJSONArray("rooms");
-            // for each room...
             for (int x = 0; x < rooms.length(); x++){
-                if (roomName.equalsIgnoreCase(rooms.getJSONObject(x).getString("Room Name"))){ // check room name
-                    // get all data from object
+                if (roomName.equalsIgnoreCase(rooms.getJSONObject(x).getString("Room Name"))){
                     String type = rooms.getJSONObject(x).getString("Type");
                     String numberSeats = rooms.getJSONObject(x).getString("Number of Seats");
                     int numberComputers = rooms.getJSONObject(x).optInt("Number of Computers", -1);
                     String occupier = rooms.getJSONObject(x).getString("Occupier");
-                    // create hashmap for the yes or no facilities
                     HashMap<String, String> yesno = new HashMap();
                     yesno.put("Screen", rooms.getJSONObject(x).getString("Contains screen"));
                     yesno.put("is Contained",rooms.getJSONObject(x).getString("Contained?"));
@@ -200,7 +192,7 @@ public class PinViewFragment extends Fragment {
                     yesno.put("Vending Machine",rooms.getJSONObject(x).getString("Vending?"));
                     yesno.put("Hot Water",rooms.getJSONObject(x).getString("Hot Water"));
                     String card = rooms.getJSONObject(x).getString("Card Access");
-                    // add other information if it is available by appending to string
+                    info = "Room Number: " + roomName + "\n";
                     if (!(type.equals(""))){
                         info += "Type: " + type + "\n";
                     }
@@ -216,13 +208,12 @@ public class PinViewFragment extends Fragment {
                     if (!(card.equals(""))){
                         info += "Card Access: " + card + "\n";
                     }
-                    // add facilities...
-                    info += "Facilities :";
+                    info += "Facilities: ";
                     Boolean first = true;
-                    Iterator it = yesno.entrySet().iterator(); // iterate through hashmap..
+                    Iterator it = yesno.entrySet().iterator();
                     while(it.hasNext()){
                         Map.Entry entry = (Map.Entry)it.next();
-                        if (entry.getValue().equals("Y")){ // if the facility is available add it to the string
+                        if (entry.getValue().equals("Y")){
                             if (first){
                                 info += " " + entry.getKey();
                                 first = false;
@@ -238,7 +229,6 @@ public class PinViewFragment extends Fragment {
         } catch (JSONException e) {
             Log.d("FROG", e.getMessage());
         }
-        // create the layout inflator
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
         // Inflate the custom layout/view
@@ -249,11 +239,12 @@ public class PinViewFragment extends Fragment {
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
-        // set the elevation
         popup.setElevation(1.0f);
-        // set the location
         popup.showAtLocation(getActivity().findViewById(id.mapView), Gravity.CENTER,0,-1000);
-        // set the text within the pop up
+
+        if (info.equals("")) {
+            info = "No additional room information";
+        }
         TextView tv = popupView.findViewById(id.popuptv);
         tv.setText(info);
 
@@ -266,6 +257,7 @@ public class PinViewFragment extends Fragment {
         Drawable draw;
         ImageView keyImage = rootView.findViewById(id.key);
         keyImage.setImageResource(0);
+
 
         // colour blind mode (or not) setup
         if (colourBlindMode) {
@@ -282,7 +274,7 @@ public class PinViewFragment extends Fragment {
         mapView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         mapView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
         mapView.setDoubleTapZoomStyle(SubsamplingScaleImageView.ZOOM_FOCUS_CENTER);
-        mapView.setMinimumDpi(600); // sets how zoomed in the user can go
+        mapView.setMinimumDpi(800); // sets how zoomed in the user can go
     }
 
     public void buttonSetup() {
@@ -348,6 +340,13 @@ public class PinViewFragment extends Fragment {
             }
         });
 
+        // button to change to colour blind mode maps
+        btnColourBlindMode = rootView.findViewById(id.btnColourBlindMode);
+        btnColourBlindMode.setOnClickListener((View view) -> {
+            colourBlindMode = !colourBlindMode;
+            updateMap();
+        });
+
 
         // general floor button listeners (changes the floors)
 
@@ -410,8 +409,6 @@ public class PinViewFragment extends Fragment {
     }
 
 
-
-
     public void pinSetup() {
         if (pinFromFloorNum == floorNum) { // if pin from floor number is current floor number
             boolean directionsToEnabledTemp = directionsToEnabled;
@@ -472,28 +469,23 @@ public class PinViewFragment extends Fragment {
         }
     }
 
-    // sets the pin down without needing an index
+
     public void setPinNoIdx(String roomName, int floorNumber) {
-        // make sure room name has a value
         if (roomName.equals("null")){
-            // check floor is correct, if not, go to correct floor
             if (floorNum != floorNumber) {
                 floorNum = floorNumber;
                 updateMap();
             }
             return;
         }
-        // get the index value
         OptionalInt indexOpt = IntStream.range(0, MapActivity.floorList.get(floorNumber).getRoomsList().size())
                 .filter(i -> MapActivity.floorList.get(floorNumber).getRoomsList().get(i).getRoomName().equals(roomName))
                 .findFirst();
-        // if the index value is correct
         if (indexOpt.isPresent()) {
             if (floorNum != floorNumber) {
                 floorNum = floorNumber;
+                setPin(roomName, indexOpt.getAsInt());
             }
-            // set the pin to the correct place
-            setPin(roomName, indexOpt.getAsInt());
         }
     }
 

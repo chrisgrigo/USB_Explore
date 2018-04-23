@@ -215,6 +215,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
+
     public void getColourBlindMode(){
         ListPreference listPreference = (ListPreference) findPreference("example_list2");
         String selectedValue = listPreference.getValue();

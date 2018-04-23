@@ -10,6 +10,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#b3e5fc"
         android:elevation="4dp"
+        android:title="Floor Maps"
          />
 
 
@@ -153,5 +154,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="128dp"
         app:srcCompat="@drawable/key" />
+
+    <Button
+        android:id="@+id/btnColourBlindMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/map_toolbar"
+        android:layout_marginTop="4dp"
+        android:text="CB Mode" />
 
 </RelativeLayout>
