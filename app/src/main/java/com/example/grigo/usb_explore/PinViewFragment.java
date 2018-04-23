@@ -1,23 +1,39 @@
 package com.example.grigo.usb_explore;
 
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.grigo.usb_explore.R.layout;
 import com.example.grigo.usb_explore.R.id;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class PinViewFragment extends Fragment {
 
@@ -45,6 +61,9 @@ public class PinViewFragment extends Fragment {
     static int pinToFloorNum = -1; // initiated to an unreachable floor
     static int pinToIdx;
 
+    String[] colourBlindMaps = {"floor0CB.jpg", "floor1CB.jpg","floor2CB.jpg","floor3CB.jpg","floor4CB.jpg","floor5CB.jpg","floor6CB.jpg"};
+    static boolean colourBlindMode = true;
+
     Button btnFloor0;
     Button btnFloor1;
     Button btnFloor2;
@@ -53,7 +72,9 @@ public class PinViewFragment extends Fragment {
     Button btnFloor5;
     Button btnFloor6;
 
-    Button btnDisabledAccess;
+    private String jsonString = "";
+    static String roomNo = "";
+    static int level = -1;
 
 
     @Override
@@ -71,6 +92,27 @@ public class PinViewFragment extends Fragment {
                 return gestureDetector.onTouchEvent(motionEvent);
             }
         });
+
+        try {
+            roomNo = getActivity().getIntent().getStringExtra("ROOM_NUMBER");
+            level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
+            btnCancelDirectionsTo.performClick();
+
+            floorNum = 0;
+            updateMap();
+
+            if (level != -1){
+                setPinNoIdx(roomNo, level);
+            }
+
+            getActivity().getIntent().removeExtra("ROOM_NUMBER");
+            getActivity().getIntent().removeExtra("LEVEL");
+            roomNo = "";
+            level = -1;
+            updateMap();
+
+        } catch (Exception e){
+        }
 
         return rootView;
     }
@@ -93,6 +135,7 @@ public class PinViewFragment extends Fragment {
 
                         setPin(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName(), i); // calls method that sets the pin at the correct coordinates for the tapped room
                         System.out.println(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName()); // (debugging) prints out room name
+                        //displayInfo(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName());
                     }
                 }
             }
@@ -100,12 +143,79 @@ public class PinViewFragment extends Fragment {
         }
     });
 
+    public void loadJSON() {
+        try {
+            InputStream is = getActivity().getAssets().open("JSONS/roominfo.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            jsonString = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            Log.d("FROG", "JSON LOAD NOT WORKING");
+        }
+    }
+
+
+    public void displayInfo(String roomName){
+        loadJSON();
+        String info = "";
+        try {
+            JSONObject obj = new JSONObject(jsonString);
+            JSONArray rooms = obj.getJSONArray("rooms");
+            for (int x = 0; x < rooms.length(); x++){
+                Log.d("FROG", rooms.getJSONObject(x).getString("Room Name"));
+                if (roomName.equalsIgnoreCase(rooms.getJSONObject(x).getString("Room Name"))){
+                    info = rooms.getJSONObject(x).toString();
+                }
+            }
+        } catch (JSONException e) {
+            Log.d("FROG", e.getMessage());
+        }
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        // Inflate the custom layout/view
+        View popupView = inflater.inflate(layout.room_popup,null);
+        // Initialize a new instance of popup window
+        PopupWindow popup = new PopupWindow(
+                popupView,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+        popup.setElevation(5.0f);
+
+        // Get a reference for the custom view close button
+        ImageButton closeButton = popupView.findViewById(R.id.ib_close);
+        TextView tv = popupView.findViewById(id.popuptv);
+        tv.setText(info);
+        // Set a click listener for the popup window close button
+        closeButton.setOnClickListener(view -> {
+            // Dismiss the popup window
+            popup.dismiss();
+        });
+        popup.showAtLocation(getActivity().findViewById(id.mapView), Gravity.CENTER,0,0);
+    }
+
+
 
     public void mapSetup() {
         mapView = rootView.findViewById(id.mapView);
-        mapView.setImage(ImageSource.asset(MapActivity.floorList.get(floorNum).getFloorMap()));
-        mapView.setScaleAndCenter(mapScale, mapCentre); // ensures that scaling is constant across floors
+        Drawable draw;
+        ImageView keyImage = rootView.findViewById(id.key);
+        keyImage.setImageResource(0);
 
+        // colour blind mode (or not) setup
+        if (colourBlindMode) {
+            mapView.setImage(ImageSource.asset(colourBlindMaps[floorNum]));
+            draw = getResources().getDrawable(R.drawable.keycb);
+        } else {
+            mapView.setImage(ImageSource.asset(MapActivity.floorList.get(floorNum).getFloorMap()));
+            draw = getResources().getDrawable(R.drawable.key);
+        }
+        keyImage.setImageDrawable(draw);
+
+
+        mapView.setScaleAndCenter(mapScale, mapCentre); // ensures that scaling is constant across floors
         mapView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         mapView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
         mapView.setDoubleTapZoomStyle(SubsamplingScaleImageView.ZOOM_FOCUS_CENTER);
@@ -229,13 +339,10 @@ public class PinViewFragment extends Fragment {
             }
         });
 
-        btnDisabledAccess = rootView.findViewById(id.btnDisabledAccess);
-        btnDisabledAccess.setOnClickListener((View view) -> {
-
-
-
-        });
     }
+
+
+
 
     public void pinSetup() {
         if (pinFromFloorNum == floorNum) { // if pin from floor number is current floor number
@@ -273,6 +380,7 @@ public class PinViewFragment extends Fragment {
         PointF pointF1 = new PointF((float)MapActivity.floorList.get(floorNum).getRoomsList().get(idx).getPinLocation().getX(),
                 (float)MapActivity.floorList.get(floorNum).getRoomsList().get(idx).getPinLocation().getY());
 
+
         if (!directionsToEnabled) { // only one pin on the map
             mapView.setPin(pointF1, "PIN FROM"); // sets the pin
             btnDirectionsTo.setVisibility(View.VISIBLE); // makes directions to button visible
@@ -284,25 +392,35 @@ public class PinViewFragment extends Fragment {
             pinFromIdx = idx;
 
         } else { // two pins on the map
-            mapView.setPin(pointF1, "PIN TO");
-            btnGo.setVisibility(View.VISIBLE); // makes go button visible
+            if (mapView.setPin(pointF1, "PIN TO")) {
+                btnGo.setVisibility(View.VISIBLE); // makes go button visible
 
-            // stores details for when floor is changed
-            pinToRoomName = roomName;
-            pinToFloorNum = floorNum;
+                // stores details for when floor is changed
+                pinToRoomName = roomName;
+                pinToFloorNum = floorNum;
 
-            pinToIdx = idx;
+                pinToIdx = idx;
+            }
         }
     }
 
-    public int getPinIdx(String roomName, int floorNum) {
-        OptionalInt indexOpt = IntStream.range(0, MapActivity.floorList.get(floorNum).getRoomsList().size())
-                .filter(i -> MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName().equals(roomName))
+
+    public void setPinNoIdx(String roomName, int floorNumber) {
+        if (roomName.equals("null")){
+            if (floorNum != floorNumber) {
+                floorNum = floorNumber;
+                updateMap();
+            }
+            return;
+        }
+        OptionalInt indexOpt = IntStream.range(0, MapActivity.floorList.get(floorNumber).getRoomsList().size())
+                .filter(i -> MapActivity.floorList.get(floorNumber).getRoomsList().get(i).getRoomName().equals(roomName))
                 .findFirst();
         if (indexOpt.isPresent()) {
-            return indexOpt.getAsInt();
-        } else {
-            return -1;
+            if (floorNum != floorNumber) {
+                floorNum = floorNumber;
+                setPin(roomName, indexOpt.getAsInt());
+            }
         }
     }
 

@@ -1,12 +1,16 @@
 package com.example.grigo.usb_explore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -102,7 +106,38 @@ public class PC_Usage_Activity extends AppCompatActivity {
         refreshHandlerTask.start();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
         listView.setAdapter(listAdapter);
-        Log.d("CRAZY", (String.valueOf(listAdapter.getGroupCount())));
+
+        listView.setOnChildClickListener((parent, view, grouppos, childpos, id) -> {
+            String roomNo = "";
+            String level = Integer.toString(grouppos + 2);
+            switch (grouppos) {
+                case 0:
+                    roomNo = lvl2.get(childpos);
+                    break;
+                case 1:
+                    roomNo = lvl3.get(childpos);
+                    break;
+                case 2:
+                    roomNo = lvl4.get(childpos);
+                    break;
+                case 3:
+                    roomNo = lvl4.get(childpos);
+                    break;
+            }
+            String roomNames[] = {"2.014", "3.005", "3.014", "3.015", "3.018", "4.015", "4.020", "4.021", "4.022", "5.011", "5.023"};
+            for (String rName: roomNames){
+                int pos = roomNo.indexOf(rName);
+                if (pos != -1){
+                    roomNo = roomNo.substring(pos, pos + rName.length());
+                    Intent intent = new Intent(getBaseContext(), MapActivity.class);
+                    intent.putExtra("ROOM_NUMBER", roomNo);
+                    intent.putExtra("LEVEL", level);
+                    startActivity(intent);
+                    return false;
+                }
+            }
+            return false;
+        });
 }
 
 
@@ -128,5 +163,7 @@ public class PC_Usage_Activity extends AppCompatActivity {
         }
 
     }
+
+
 
 }

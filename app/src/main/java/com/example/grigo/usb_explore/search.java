@@ -36,6 +36,8 @@ public class search extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        roomNo = "";
+        level = "";
         setContentView(R.layout.activity_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -112,15 +114,12 @@ public class search extends AppCompatActivity{
             }
         });
 
-        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if ((!(roomNo.equals(""))) && (!(level.equals("")))){
-                    Intent intent = new Intent(getBaseContext(), MapActivity.class);
-                    intent.putExtra("ROOM_NUMBER", roomNo);
-                    intent.putExtra("LEVEL", level);
-                    startActivity(intent);
-                }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            if ((!(roomNo.equals(""))) && (!(level.equals("")))){
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                intent.putExtra("ROOM_NUMBER", roomNo);
+                intent.putExtra("LEVEL", level);
+                startActivity(intent);
             }
         });
 

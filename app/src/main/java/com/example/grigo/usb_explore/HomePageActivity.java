@@ -32,7 +32,6 @@ public class HomePageActivity extends AppCompatActivity
     ImageButton floormaps, staffsearch, venue, findapc;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +52,7 @@ public class HomePageActivity extends AppCompatActivity
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }}
         );
@@ -161,5 +161,4 @@ public class HomePageActivity extends AppCompatActivity
         HashMapForLocalRes.put("USB 4th Floor Balcony", R.drawable.slide3);
 
     }
-
 }

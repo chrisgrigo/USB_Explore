@@ -1,5 +1,7 @@
 package com.example.grigo.usb_explore;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -37,34 +39,23 @@ public class MapActivity extends AbstractFragmentsActivity {
                     .replace(id.frame, PinViewFragment.class.newInstance())
                     .commit();
         } catch (Exception e) {
+            Log.d("CAUTION", e.getMessage());
         }
     }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         floorSetup();
-        goToRoom();
     }
 
-    private void goToRoom(){
-        try {
-            PinViewFragment pvf = new PinViewFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(id.frame, pvf)
-                    .commit();
-            String roomNo = getIntent().getStringExtra("ROOM_NUMBER");
-            String level = getIntent().getStringExtra("LEVEL");
-            Log.d("CAUTION", "Room Number: " + roomNo + " Level: " + Integer.parseInt(level));
-            int idx = pvf.getPinIdx(roomNo, Integer.parseInt(level));
-            Log.d("CAUTION", Integer.toString(idx));
-            pvf.setPin(roomNo, idx);
-        } catch (Exception e){
-            Log.d("CAUTION", "THERES AN ERROR: " + e.toString());
-        }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomePageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
-
 
 
     public void floorSetup() {
@@ -153,15 +144,15 @@ public class MapActivity extends AbstractFragmentsActivity {
         Node r3004 = new Node(new Coord(1005, 2996), 3);
         floorList.get(3).addRoom(new Room("3.004", new Coord(742, 2852), new Coord(1006, 3315), new Coord(855, 2967), r3004));
         Node r3005 = new Node(new Coord(1302, 2314), 3);
-        floorList.get(3).addRoom(new Room("Flat Floor Teaching (A) 3.005", new Coord(478, 2190), new Coord(1261, 2845), new Coord(864, 2255), r3005));
+        floorList.get(3).addRoom(new Room("3.005", new Coord(478, 2190), new Coord(1261, 2845), new Coord(864, 2255), r3005));
         Node r3008 = new Node(new Coord(1472, 2026), 3);
         floorList.get(3).addRoom(new Room("3.008", new Coord(1471, 1814), new Coord(1715, 2022), new Coord(1589, 1900), r3008));
         Node r3009 = new Node(new Coord(1468, 2165), 3);
         floorList.get(3).addRoom(new Room("3.009", new Coord(1471, 2026), new Coord(1715, 2275), new Coord(1583, 2049), r3009));
         Node r3015 = new Node(new Coord(1302, 1828), 3);
-        floorList.get(3).addRoom(new Room("Flat Floor Teaching (B) 3.015", new Coord(482, 769), new Coord(1268, 1965), new Coord(907, 909), r3015));
+        floorList.get(3).addRoom(new Room("3.015", new Coord(482, 769), new Coord(1268, 1965), new Coord(907, 909), r3015));
         Node r3018 = new Node(new Coord(1302, 663), 3);
-        floorList.get(3).addRoom(new Room("Flat Floor Teaching (C) 3.018", new Coord(471, 205), new Coord(1270, 767), new Coord(906, 254), r3018));
+        floorList.get(3).addRoom(new Room("3.018", new Coord(471, 205), new Coord(1270, 767), new Coord(906, 254), r3018));
         Node r3031 = new Node(new Coord(2071, 520), 3);
         floorList.get(3).addRoom(new Room("3.031", new Coord(2689, 205), new Coord(4120, 513), new Coord(2978, 360), r3031));
         Node r3032 = new Node(new Coord(2243, 520), 3);

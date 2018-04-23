@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\grigo\AndroidStudioProjects\USB_Explore\Computer Science-USB_Explore.iml" filepath="C:\Users\grigo\AndroidStudioProjects\USB_Explore\Computer Science-USB_Explore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Computer Science-USB_Explore.iml" filepath="$PROJECT_DIR$/Computer Science-USB_Explore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../grigo/AndroidStudioProjects/USB_Explore/Computer Science-USB_Explore.iml" filepath="$PROJECT_DIR$/../../../../grigo/AndroidStudioProjects/USB_Explore/Computer Science-USB_Explore.iml" />
       <module fileurl="file://$PROJECT_DIR$/USB_Explore.iml" filepath="$PROJECT_DIR$/USB_Explore.iml" />
-      <module fileurl="file://C:\Users\grigo\AndroidStudioProjects\USB_Explore\app\USB_Explore-app.iml" filepath="C:\Users\grigo\AndroidStudioProjects\USB_Explore\app\USB_Explore-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/USB_Explore-app.iml" filepath="$PROJECT_DIR$/app/USB_Explore-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../grigo/AndroidStudioProjects/USB_Explore/app/USB_Explore-app.iml" filepath="$PROJECT_DIR$/../../../../grigo/AndroidStudioProjects/USB_Explore/app/USB_Explore-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
