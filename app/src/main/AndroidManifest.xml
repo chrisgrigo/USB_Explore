@@ -47,6 +47,7 @@
         <activity
             android:name=".MapActivity"
             android:label="MapActivity"
+            android:launchMode='singleTask'
             android:parentActivityName=".HomePageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

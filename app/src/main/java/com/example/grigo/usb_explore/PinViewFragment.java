@@ -74,7 +74,6 @@ public class PinViewFragment extends Fragment {
     private String jsonString = "";
     static String roomNo = "";
     static int level = -1;
-    static int counter = 0;
 
 
     @Override
@@ -103,13 +102,8 @@ public class PinViewFragment extends Fragment {
             level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
             btnCancelDirectionsTo.performClick();
 
-            if (counter == 0) {
-                counter = 1;
-                floorNum = 0;
-                updateMap();
-            } else {
-                counter = 0;
-            }
+            floorNum = 0;
+            updateMap();
 
             if (level != -1){
                 setPinNoIdx(roomNo, level);

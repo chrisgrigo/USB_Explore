@@ -116,7 +116,7 @@ public class search extends AppCompatActivity{
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             if ((!(roomNo.equals(""))) && (!(level.equals("")))){
-                Intent intent = new Intent(getBaseContext(), MapActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 intent.putExtra("ROOM_NUMBER", roomNo);
                 intent.putExtra("LEVEL", level);
                 startActivity(intent);
