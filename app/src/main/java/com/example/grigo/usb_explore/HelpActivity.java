@@ -67,20 +67,23 @@ public class HelpActivity extends AppCompatActivity {
         /*CONTENT HERE*/
         faqList2.add("\"What can this app be used for?\" \r\n\"" +
                 "This application is essentially a mobile guide around the Urban Sciences Building (USB) owned by Newcastle University." +
-                " It allows you to look at all floors of the building on an interactive map. You can find directions from any 2 rooms of your choice," +
-                " search for \nstaff rooms, and even find available PCs in the building which updates with live statistics every 10 minutes!\"\n\n" +
-                " \"What can i do if i find a bug?\" \"If a bug is found, please navigate to the \"help\" section found on the home page. " +
+                " \nIt allows you to look at all floors of the building on an interactive \nmap. You can find directions from any 2 rooms of your choice," +
+                " search for \nstaff rooms, and even find available PCs in the building which \nupdates with live statistics every 10 minutes!\"\n\n" +
+                " \"What can i do if i find a bug?\" \n\"If a bug is found, please navigate to the \"help\" section found on the home page. " +
                 "Click on the \"Send Feedback\" button at the top right, which will open a popup window that allows you to submit a query. " +
-                "Notate the issue and how you caused it to occur, and we will work as quick as we can to fix it.\"\r\n\n" +
+                "Notate the issue and how it occurred, and we will work as quickly as we can to fix it.\"\r\n\n" +
                 "\"Where can i find information about different rooms?\" \r\n " +
-                "\"Navigate to the map via the home page, and click on any room on the map which will cause a small \"i\" icon to appear. " +
-                "Click on this, \nand information about the selected room will pop up.\"\r\n"
+                "\"Navigate to the map via the home page, and click on any room on the map. Information about the selected room will pop up.\"\r\n\n" +
+                "\"Currently known issues\" \r\n " +
+                "- Directions stop working if the user returns to the homepage. The current solution is to do a hard reset of the application. We are " +
+                        "looking into this. \n- The \"lift only\" mode for disabled users has not been implemented. \nWe hope to add this as soon " +
+                        "as possible. Please check back for future updates.\r\n"
         );
         termsList2.add("Terms and conditions, as may be amended from time to time, \n" +
         "apply to all of our services. By accessing our application you acknowledge and agree with our Terms and Conditions. \n" +
         "As our application is uploaded to Google Play it follows that user should have read and agree with Google Play Terms of Service: \n" +
-                "https://play.google.com/intl/en-us_us/about/play-terms.html");
-        aboutList2.add("This application was made by a second year computer  \nscience team for a project as part of the course");
+                "https://play.google.com/intl/en-us_us/about/play-terms.html\n");
+        aboutList2.add("This application was made by a second year computer  \nscience team as part of the course. \n\n Version 1.0 \n23/04/2018\n\n\n");
 
         listHash_Help2.put(listDataHeader_Help2.get(0),faqList2);
         listHash_Help2.put(listDataHeader_Help2.get(1),termsList2);
