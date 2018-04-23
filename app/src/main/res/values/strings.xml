@@ -16,4 +16,5 @@
     <string name="floor5">5</string>
     <string name="floor6">6</string>
     <string name="disabled_access">Disabled Access</string>
+    <string name="windowText">This is a sample popup window.</string>
 </resources>
