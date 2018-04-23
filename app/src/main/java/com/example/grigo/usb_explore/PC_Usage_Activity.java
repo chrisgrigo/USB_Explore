@@ -106,27 +106,37 @@ public class PC_Usage_Activity extends AppCompatActivity {
         refreshHandlerTask.start();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
         listView.setAdapter(listAdapter);
-        listView.setOnItemClickListener((parent, view, position, id) -> {
+
+        listView.setOnChildClickListener((parent, view, grouppos, childpos, id) -> {
             String roomNo = "";
-            int level = Integer.parseInt(listDataHeader.get(position));
-            switch (level) {
+            String level = Integer.toString(grouppos + 2);
+            switch (grouppos) {
+                case 0:
+                    roomNo = lvl2.get(childpos);
+                    break;
+                case 1:
+                    roomNo = lvl3.get(childpos);
+                    break;
                 case 2:
-                    roomNo = lvl2.get(position);
+                    roomNo = lvl4.get(childpos);
                     break;
                 case 3:
-                    roomNo = lvl3.get(position - 1);
-                    break;
-                case 4:
-                    roomNo = lvl3.get(position - 5);
-                    break;
-                case 5:
-                    roomNo = lvl3.get(position - 9);
+                    roomNo = lvl4.get(childpos);
                     break;
             }
-            Intent intent = new Intent(getBaseContext(), MapActivity.class);
-            intent.putExtra("ROOM_NUMBER", roomNo);
-            intent.putExtra("LEVEL", level);
-            startActivity(intent);
+            String roomNames[] = {"2.014", "3.005", "3.014", "3.015", "3.018", "4.015", "4.020", "4.021", "4.022", "5.011", "5.023"};
+            for (String rName: roomNames){
+                int pos = roomNo.indexOf(rName);
+                if (pos != -1){
+                    roomNo = roomNo.substring(pos, pos + rName.length());
+                    Intent intent = new Intent(getBaseContext(), MapActivity.class);
+                    intent.putExtra("ROOM_NUMBER", roomNo);
+                    intent.putExtra("LEVEL", level);
+                    startActivity(intent);
+                    return false;
+                }
+            }
+            return false;
         });
 }
 

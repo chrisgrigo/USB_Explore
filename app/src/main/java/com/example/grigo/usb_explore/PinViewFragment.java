@@ -4,6 +4,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -78,9 +79,10 @@ public class PinViewFragment extends Fragment {
         try {
             String roomNo = getActivity().getIntent().getStringExtra("ROOM_NUMBER");
             int level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
+            Log.d("FROG", roomNo + " on " + level);
             setPinNoIdx(roomNo, level);
         } catch (Exception e){
-
+            Log.d("FROG", e.getMessage());
         }
 
         return rootView;
@@ -306,6 +308,13 @@ public class PinViewFragment extends Fragment {
 
 
     public void setPinNoIdx(String roomName, int floorNumber) {
+        if (roomName.equals("null")){
+            if (floorNum != floorNumber) {
+                floorNum = floorNumber;
+                updateMap();
+            }
+            return;
+        }
         OptionalInt indexOpt = IntStream.range(0, MapActivity.floorList.get(floorNumber).getRoomsList().size())
                 .filter(i -> MapActivity.floorList.get(floorNumber).getRoomsList().get(i).getRoomName().equals(roomName))
                 .findFirst();
@@ -314,6 +323,7 @@ public class PinViewFragment extends Fragment {
                 floorNum = floorNumber;
                 updateMap();
             } else {
+
                 setPin(roomName, indexOpt.getAsInt());
             }
         }
