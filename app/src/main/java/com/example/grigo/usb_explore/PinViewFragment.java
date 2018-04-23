@@ -2,7 +2,6 @@ package com.example.grigo.usb_explore;
 
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -63,6 +61,9 @@ public class PinViewFragment extends Fragment {
     static int pinToFloorNum = -1; // initiated to an unreachable floor
     static int pinToIdx;
 
+    String[] colourBlindMaps = {"floor0CB.jpg", "floor1CB.jpg","floor2CB.jpg","floor3CB.jpg","floor4CB.jpg","floor5CB.jpg","floor6CB.jpg"};
+    static boolean colourBlindMode = true;
+
     Button btnFloor0;
     Button btnFloor1;
     Button btnFloor2;
@@ -84,11 +85,6 @@ public class PinViewFragment extends Fragment {
         mapSetup(); // sets up the map
         buttonSetup(); // sets up all the buttons
         pinSetup(); // sets up the pins for that floor
-
-        ImageView keyImage = rootView.findViewById(id.key);
-        keyImage.setImageResource(0);
-        Drawable draw = getResources().getDrawable(R.drawable.key);
-        keyImage.setImageDrawable(draw);
 
         mapView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -204,9 +200,22 @@ public class PinViewFragment extends Fragment {
 
     public void mapSetup() {
         mapView = rootView.findViewById(id.mapView);
-        mapView.setImage(ImageSource.asset(MapActivity.floorList.get(floorNum).getFloorMap()));
-        mapView.setScaleAndCenter(mapScale, mapCentre); // ensures that scaling is constant across floors
+        Drawable draw;
+        ImageView keyImage = rootView.findViewById(id.key);
+        keyImage.setImageResource(0);
 
+        // colour blind mode (or not) setup
+        if (colourBlindMode) {
+            mapView.setImage(ImageSource.asset(colourBlindMaps[floorNum]));
+            draw = getResources().getDrawable(R.drawable.keycb);
+        } else {
+            mapView.setImage(ImageSource.asset(MapActivity.floorList.get(floorNum).getFloorMap()));
+            draw = getResources().getDrawable(R.drawable.key);
+        }
+        keyImage.setImageDrawable(draw);
+
+
+        mapView.setScaleAndCenter(mapScale, mapCentre); // ensures that scaling is constant across floors
         mapView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         mapView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
         mapView.setDoubleTapZoomStyle(SubsamplingScaleImageView.ZOOM_FOCUS_CENTER);
