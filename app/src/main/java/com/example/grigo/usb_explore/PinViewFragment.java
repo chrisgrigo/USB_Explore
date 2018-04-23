@@ -30,6 +30,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
@@ -173,9 +176,53 @@ public class PinViewFragment extends Fragment {
             JSONObject obj = new JSONObject(jsonString);
             JSONArray rooms = obj.getJSONArray("rooms");
             for (int x = 0; x < rooms.length(); x++){
-                Log.d("FROG", rooms.getJSONObject(x).getString("Room Name"));
                 if (roomName.equalsIgnoreCase(rooms.getJSONObject(x).getString("Room Name"))){
-                    info = rooms.getJSONObject(x).toString();
+                    String type = rooms.getJSONObject(x).getString("Type");
+                    String numberSeats = rooms.getJSONObject(x).getString("Number of Seats");
+                    int numberComputers = rooms.getJSONObject(x).optInt("Number of Computers", -1);
+                    String occupier = rooms.getJSONObject(x).getString("Occupier");
+                    HashMap<String, String> yesno = new HashMap();
+                    yesno.put("Screen", rooms.getJSONObject(x).getString("Contains screen"));
+                    yesno.put("is Contained",rooms.getJSONObject(x).getString("Contained?"));
+                    yesno.put("Socket",rooms.getJSONObject(x).getString("Socket?"));
+                    yesno.put("Disabled Access",rooms.getJSONObject(x).getString("Disabled?"));
+                    yesno.put("GN",rooms.getJSONObject(x).getString("GN?"));
+                    yesno.put("Whiteboard",rooms.getJSONObject(x).getString("Whiteboard?"));
+                    yesno.put("Vending Machine",rooms.getJSONObject(x).getString("Vending?"));
+                    yesno.put("Hot Water",rooms.getJSONObject(x).getString("Hot Water"));
+                    String card = rooms.getJSONObject(x).getString("Card Access");
+                    info = "Room Number: " + roomName + "\n";
+                    if (!(type.equals(""))){
+                        info += "Type: " + type + "\n";
+                    }
+                    if (numberComputers != -1){
+                        info += "Number of Computers: " + numberComputers + "\n";
+                    }
+                    if (!(numberSeats.equals(""))){
+                        info += "Number of Seats: " + numberSeats + "\n";
+                    }
+                    if (!(occupier.equals(""))){
+                        info += "Occupier: " + occupier + "\n";
+                    }
+                    if (!(card.equals(""))){
+                        info += "Card Access: " + card + "\n";
+                    }
+                    info += "Facilities :";
+                    Boolean first = true;
+                    Iterator it = yesno.entrySet().iterator();
+                    while(it.hasNext()){
+                        Map.Entry entry = (Map.Entry)it.next();
+                        if (entry.getValue().equals("Y")){
+                            if (first){
+                                info += " " + entry.getKey();
+                                first = false;
+                            } else {
+                                info += ", " + entry.getKey();
+                            }
+                        }
+                        it.remove();
+                    }
+
                 }
             }
         } catch (JSONException e) {
@@ -197,16 +244,8 @@ public class PinViewFragment extends Fragment {
         if (info.equals("")) {
             info = "No additional room information";
         }
-
-        // Get a reference for the custom view close button
-        ImageButton closeButton = popupView.findViewById(R.id.ib_close);
         TextView tv = popupView.findViewById(id.popuptv);
         tv.setText(info);
-        // Set a click listener for the popup window close button
-        closeButton.setOnClickListener(view -> {
-            // Dismiss the popup window
-            popup.dismiss();
-        });
 
     }
 
