@@ -1,6 +1,7 @@
 package com.example.grigo.usb_explore;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -109,7 +110,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
-
     }
 
     /**
@@ -215,5 +215,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
-
+    public void getColourBlindMode(){
+        ListPreference listPreference = (ListPreference) findPreference("example_list2");
+        String selectedValue = listPreference.getValue();
+        if (selectedValue.equals("0")){
+            PinViewFragment.colourBlindMode = true;
+        } else {
+            PinViewFragment.colourBlindMode = false;
+        }
+    }
 }
