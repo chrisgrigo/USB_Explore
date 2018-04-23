@@ -1,6 +1,7 @@
 package com.example.grigo.usb_explore;
 
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,12 +71,10 @@ public class PinViewFragment extends Fragment {
     Button btnFloor5;
     Button btnFloor6;
 
-    Button btnDisabledAccess;
-
     private String jsonString = "";
-    String roomNo = "";
-    int level = 0;
-
+    static String roomNo = "";
+    static int level = -1;
+    static int counter = 0;
 
 
     @Override
@@ -86,6 +86,11 @@ public class PinViewFragment extends Fragment {
         buttonSetup(); // sets up all the buttons
         pinSetup(); // sets up the pins for that floor
 
+        ImageView keyImage = rootView.findViewById(id.key);
+        keyImage.setImageResource(0);
+        Drawable draw = getResources().getDrawable(R.drawable.key);
+        keyImage.setImageDrawable(draw);
+
         mapView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -96,11 +101,23 @@ public class PinViewFragment extends Fragment {
         try {
             roomNo = getActivity().getIntent().getStringExtra("ROOM_NUMBER");
             level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
-            getActivity().getIntent().removeExtra("ROOM_NUMBER");
-            getActivity().getIntent().removeExtra("LEVEL");
+            btnCancelDirectionsTo.performClick();
+
+            if (counter == 0) {
+                counter = 1;
+                floorNum = 0;
+                updateMap();
+            } else {
+                counter = 0;
+            }
+
             if (level != -1){
                 setPinNoIdx(roomNo, level);
             }
+
+            getActivity().getIntent().removeExtra("ROOM_NUMBER");
+            getActivity().getIntent().removeExtra("LEVEL");
+            roomNo = "";
             level = -1;
             updateMap();
 
@@ -188,8 +205,6 @@ public class PinViewFragment extends Fragment {
         });
         popup.showAtLocation(getActivity().findViewById(id.mapView), Gravity.CENTER,0,0);
     }
-
-
 
 
 

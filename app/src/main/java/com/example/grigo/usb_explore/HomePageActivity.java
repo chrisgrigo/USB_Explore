@@ -32,7 +32,6 @@ public class HomePageActivity extends AppCompatActivity
     ImageButton floormaps, staffsearch, venue, findapc;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
