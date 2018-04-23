@@ -22,8 +22,13 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class search extends AppCompatActivity{
+/**
+ * Created by Tanmoy on 18/10/2017.
+ */
 
+
+public class search extends AppCompatActivity{
+        // Get database and initialise variables
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbr = database.getInstance().getReference();
         String message;
@@ -36,8 +41,10 @@ public class search extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // reset variables from last search
         roomNo = "";
         level = "";
+        // set all GUI elements
         setContentView(R.layout.activity_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -45,9 +52,11 @@ public class search extends AppCompatActivity{
         getSupportActionBar().setTitle("Staff/Room Search");
         SearchView search = findViewById(R.id.searchView);
         final ListView listView = findViewById(R.id.list_view);
+        // initialise list
         for (int x = 0; x < list.length; x++){
             list[x] = "";
         }
+        // create and initialise adapter to display list
         arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list);
         listView.setAdapter(arrayAdapter);
         search.setActivated(true);
@@ -56,52 +65,57 @@ public class search extends AppCompatActivity{
         search.setIconified(false);
         search.clearFocus();
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // upon search submit
             @Override
             public boolean onQueryTextSubmit(String query) {
                 message = query;
                 dbr.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        // for each room
+                        int count = 0;
                         for (int i = 0; i < numberOfRooms; i++) {
-                            int count = 0;
                             try {
+                                // get data from firebase database
                                 String lastName = dataSnapshot.child(Integer.toString(i)).child("Last Name").getValue(String.class);
                                 String firstName = dataSnapshot.child(Integer.toString(i)).child("First Name").getValue(String.class);
                                 roomNo = dataSnapshot.child(Integer.toString(i)).child("Room Number").getValue(String.class);
                                 String title = dataSnapshot.child(Integer.toString(i)).child("Title").getValue(String.class);
                                 level = dataSnapshot.child(Integer.toString(i)).child("Level").getValue(String.class);
+                                // Use if statements to check if theres any matches for last name
                                 if (lastName.equalsIgnoreCase(message)) {
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
                                     count = count + 1;
                                     break;
-                                } else if (firstName.equalsIgnoreCase(message)){
+                                } else if (firstName.equalsIgnoreCase(message)){ // first name check
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
                                     count = count + 1;
                                     break;
-                                } else if (roomNo.equalsIgnoreCase(message)){
+                                } else if (roomNo.equalsIgnoreCase(message)){ // room number check
                                     if (roomNo.equals("null")){
                                         list[count] = (title + " " + firstName + " " + lastName + "'s room is on level " + level + "\n");
                                     }
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
                                     count = count + 1;
                                     break;
-                                } else if ((firstName + " " + lastName).equalsIgnoreCase(message)){
+                                } else if ((firstName + " " + lastName).equalsIgnoreCase(message)){ // first and last name check
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
                                     count = count + 1;
                                     break;
-                                } else if ((title + " " + firstName + " " + lastName).equalsIgnoreCase(message)){
+                                } else if ((title + " " + firstName + " " + lastName).equalsIgnoreCase(message)){ // full name including title check
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
                                     count = count + 1;
                                     break;
                                 }
-                            } catch (Exception e) {
+                            } catch (Exception e) { //if not found
                                 list[0] = "Staff Member or Room not found!";
                             }
                         }
+                        // display the new data using a new array adapter
                         ArrayAdapter arrayAdapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list);
                         listView.setAdapter(arrayAdapter2);
                     }
-                    public void onCancelled(DatabaseError er){
+                    public void onCancelled(DatabaseError er){ // if there's a database error - likely connection failure
                         list[0] = ("No internet connection available!");
                     }
                 });
@@ -113,9 +127,11 @@ public class search extends AppCompatActivity{
                 return false;
             }
         });
-
+        // create on click listener for list elements
         listView.setOnItemClickListener((parent, view, position, id) -> {
+            // if both room number and level aren't empty strings
             if ((!(roomNo.equals(""))) && (!(level.equals("")))){
+                // put them in the intent and start the map activity
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 intent.putExtra("ROOM_NUMBER", roomNo);
                 intent.putExtra("LEVEL", level);
