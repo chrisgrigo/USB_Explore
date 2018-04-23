@@ -82,7 +82,6 @@ public class PinViewFragment extends Fragment {
 
         rootView = inflater.inflate(layout.pin_view_fragment, container, false);
 
-
         mapSetup(); // sets up the map
         buttonSetup(); // sets up all the buttons
         pinSetup(); // sets up the pins for that floor
@@ -99,9 +98,11 @@ public class PinViewFragment extends Fragment {
             level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
             getActivity().getIntent().removeExtra("ROOM_NUMBER");
             getActivity().getIntent().removeExtra("LEVEL");
-            if (level != 0){
+            if (level != -1){
                 setPinNoIdx(roomNo, level);
             }
+            level = -1;
+            updateMap();
 
         } catch (Exception e){
         }
@@ -127,7 +128,7 @@ public class PinViewFragment extends Fragment {
 
                         setPin(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName(), i); // calls method that sets the pin at the correct coordinates for the tapped room
                         System.out.println(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName()); // (debugging) prints out room name
-                        displayInfo(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName());
+                        //displayInfo(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName());
                     }
                 }
             }
@@ -373,14 +374,15 @@ public class PinViewFragment extends Fragment {
             pinFromIdx = idx;
 
         } else { // two pins on the map
-            mapView.setPin(pointF1, "PIN TO");
-            btnGo.setVisibility(View.VISIBLE); // makes go button visible
+            if (mapView.setPin(pointF1, "PIN TO")) {
+                btnGo.setVisibility(View.VISIBLE); // makes go button visible
 
-            // stores details for when floor is changed
-            pinToRoomName = roomName;
-            pinToFloorNum = floorNum;
+                // stores details for when floor is changed
+                pinToRoomName = roomName;
+                pinToFloorNum = floorNum;
 
-            pinToIdx = idx;
+                pinToIdx = idx;
+            }
         }
     }
 
@@ -399,9 +401,6 @@ public class PinViewFragment extends Fragment {
         if (indexOpt.isPresent()) {
             if (floorNum != floorNumber) {
                 floorNum = floorNumber;
-                updateMap();
-            } else {
-
                 setPin(roomName, indexOpt.getAsInt());
             }
         }

@@ -46,7 +46,7 @@ public class PinView extends SubsamplingScaleImageView {
         initialise();
     }
 
-    public void setPin(PointF pin, String pinName) {
+    public boolean setPin(PointF pin, String pinName) {
         if (!pinF.contains(pin)) {
             if (pinNames.contains(pinName)) {
                 removePin(pinName);
@@ -55,7 +55,9 @@ public class PinView extends SubsamplingScaleImageView {
             pinNames.add(pinName);
             initialise();
             invalidate();
+            return true;
         }
+        return false;
     }
 
     public void removePin(String pinName) {
