@@ -76,6 +76,8 @@ public class PinViewFragment extends Fragment {
     static String roomNo = "";
     static int level = -1;
 
+    PopupWindow popup;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -123,6 +125,10 @@ public class PinViewFragment extends Fragment {
 
             if (mapView.isReady() && !navigationModeEnabled) { // ensure that map is ready and that not in navigation mode (pins shouldn't be able to be added)
 
+                try {
+                    popup.dismiss();
+                } catch (Exception ex) {}
+
                 PointF pointF = mapView.viewToSourceCoord(e.getX(), e.getY()); // tap location on mapView
                 System.out.println((int)pointF.x + ", " + (int)pointF.y); // (debugging) prints out the touch coordinates on mapView
 
@@ -135,7 +141,10 @@ public class PinViewFragment extends Fragment {
 
                         setPin(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName(), i); // calls method that sets the pin at the correct coordinates for the tapped room
                         System.out.println(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName()); // (debugging) prints out room name
-                        //displayInfo(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName());
+
+                        if (!directionsToEnabled && !navigationModeEnabled) {
+                            displayInfo(MapActivity.floorList.get(floorNum).getRoomsList().get(i).getRoomName());
+                        }
                     }
                 }
             }
@@ -177,12 +186,17 @@ public class PinViewFragment extends Fragment {
         // Inflate the custom layout/view
         View popupView = inflater.inflate(layout.room_popup,null);
         // Initialize a new instance of popup window
-        PopupWindow popup = new PopupWindow(
+        popup = new PopupWindow(
                 popupView,
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
-        popup.setElevation(5.0f);
+        popup.setElevation(1.0f);
+        popup.showAtLocation(getActivity().findViewById(id.mapView), Gravity.CENTER,0,-1000);
+
+        if (info.equals("")) {
+            info = "No additional room information";
+        }
 
         // Get a reference for the custom view close button
         ImageButton closeButton = popupView.findViewById(R.id.ib_close);
@@ -193,7 +207,7 @@ public class PinViewFragment extends Fragment {
             // Dismiss the popup window
             popup.dismiss();
         });
-        popup.showAtLocation(getActivity().findViewById(id.mapView), Gravity.CENTER,0,0);
+
     }
 
 
@@ -227,6 +241,11 @@ public class PinViewFragment extends Fragment {
         // if directions to button pressed
         btnDirectionsTo = rootView.findViewById(id.btnDirectionsTo);
         btnDirectionsTo.setOnClickListener((View view) -> {
+
+            try {
+                popup.dismiss();
+            } catch (Exception ex) {}
+
             btnCancelDirectionsTo.setVisibility(View.VISIBLE); // makes cancel button visible
             btnDirectionsTo.setEnabled(false); // button already pressed, so disable it
             directionsToEnabled = true; // now in directions to ("mode")
@@ -425,6 +444,11 @@ public class PinViewFragment extends Fragment {
     }
 
     public void updateMap() {
+
+        try {
+            popup.dismiss();
+        } catch (Exception ex) {}
+
         mapScale = mapView.getScale();
         mapCentre = mapView.getCenter();
         ((MapActivity)getActivity()).onPageChanged(1);
