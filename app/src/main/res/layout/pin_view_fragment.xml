@@ -4,107 +4,154 @@
 
     <com.example.grigo.usb_explore.PinView style="@style/mainPanel" android:id="@+id/mapView"/>
 
+    <android.widget.Toolbar
+        android:id="@+id/map_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#b3e5fc"
+        android:elevation="4dp"
+         />
+
+
     <Button
         android:id="@+id/btnDirectionsTo"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="60dp"
         android:layout_marginStart="25dp"
+        android:background="@color/colorPrimary"
         android:text="@string/directions_to"
-        android:visibility="invisible"/>
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btnGo"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/black"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="60dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="133dp"
         android:text="@string/go"
         android:visibility="invisible"/>
 
     <Button
         android:id="@+id/btnCancelDirectionsTo"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="60dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="30dp"
         android:text="@string/cancel_directions_to"
         android:visibility="invisible"/>
 
     <Button
         android:id="@+id/btnFloor0"
-        android:layout_width="40dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
         android:layout_marginStart="25dp"
-        android:text="@string/floor0"/>
+        android:background="@color/colorPrimary"
+        android:text="@string/floor0"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnFloor1"
-        android:layout_width="40dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="65dp"
+        android:layout_marginStart="76dp"
         android:text="@string/floor1"/>
 
     <Button
         android:id="@+id/btnFloor2"
-        android:layout_width="40dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="105dp"
+        android:layout_marginStart="127dp"
         android:text="@string/floor2"/>
 
     <Button
         android:id="@+id/btnFloor3"
-        android:layout_width="40dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="145dp"
+        android:layout_marginStart="178dp"
         android:text="@string/floor3"/>
 
     <Button
         android:id="@+id/btnFloor4"
-        android:layout_width="40dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="185dp"
+        android:layout_marginStart="229dp"
         android:text="@string/floor4"/>
 
     <Button
         android:id="@+id/btnFloor5"
-        android:layout_width="40dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="225dp"
+        android:layout_marginStart="280dp"
         android:text="@string/floor5"/>
 
     <Button
         android:id="@+id/btnFloor6"
-        android:layout_width="40dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="265dp"
+        android:layout_marginStart="331dp"
         android:text="@string/floor6"/>
 
     <ImageView
