@@ -207,7 +207,7 @@ public class PinViewFragment extends Fragment {
                     if (!(card.equals(""))){
                         info += "Card Access: " + card + "\n";
                     }
-                    info += "Facilities :";
+                    info += "Facilities: ";
                     Boolean first = true;
                     Iterator it = yesno.entrySet().iterator();
                     while(it.hasNext()){
@@ -260,7 +260,7 @@ public class PinViewFragment extends Fragment {
 
 
 
-        
+
 
 
 
