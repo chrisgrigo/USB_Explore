@@ -168,6 +168,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("example_list"));
             bindPreferenceSummaryToValue(findPreference("example_list2"));
+            bindPreferenceSummaryToValue(findPreference("example_list3"));
         }
 
         @Override
