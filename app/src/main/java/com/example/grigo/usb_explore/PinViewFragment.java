@@ -274,7 +274,7 @@ public class PinViewFragment extends Fragment {
         mapView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         mapView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
         mapView.setDoubleTapZoomStyle(SubsamplingScaleImageView.ZOOM_FOCUS_CENTER);
-        mapView.setMinimumDpi(800); // sets how zoomed in the user can go
+        mapView.setMinimumDpi(600); // sets how zoomed in the user can go
     }
 
     public void buttonSetup() {
