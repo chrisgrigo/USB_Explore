@@ -65,7 +65,7 @@ public class PinViewFragment extends Fragment {
     static int pinToIdx;
 
     String[] colourBlindMaps = {"floor0CB.jpg", "floor1CB.jpg","floor2CB.jpg","floor3CB.jpg","floor4CB.jpg","floor5CB.jpg","floor6CB.jpg"};
-    static boolean colourBlindMode = true;
+    static boolean colourBlindMode;
 
     Button btnFloor0;
     Button btnFloor1;

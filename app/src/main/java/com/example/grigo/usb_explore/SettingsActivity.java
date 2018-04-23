@@ -166,8 +166,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
+            //Examplelist1 - Language
+            //Examplelist2 - ColourBlind
+            //Examplelist3 - Navigation
             bindPreferenceSummaryToValue(findPreference("example_list"));
             bindPreferenceSummaryToValue(findPreference("example_list2"));
+            bindPreferenceSummaryToValue(findPreference("example_list3"));
         }
 
         @Override
