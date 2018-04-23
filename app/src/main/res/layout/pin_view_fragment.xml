@@ -21,7 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="60dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="26dp"
         android:text="@string/directions_to"
         android:textSize="14sp"
         android:visibility="invisible" />
@@ -33,7 +33,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="60dp"
-        android:layout_marginEnd="118dp"
+        android:layout_marginEnd="116dp"
         android:text="@string/go"
         android:visibility="invisible"/>
 
@@ -44,7 +44,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="60dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="28dp"
         android:text="@string/cancel_directions_to"
         android:visibility="invisible"/>
 
@@ -152,7 +152,8 @@
         android:layout_height="252dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="128dp"
+        android:layout_marginEnd="-4dp"
+        android:layout_marginBottom="130dp"
         app:srcCompat="@drawable/key" />
 
     <Button
@@ -161,7 +162,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/map_toolbar"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="3dp"
         android:text="CB Mode" />
 
 </RelativeLayout>
