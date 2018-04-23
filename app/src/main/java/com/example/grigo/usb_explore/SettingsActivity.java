@@ -170,8 +170,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             //Examplelist2 - ColourBlind
             //Examplelist3 - Navigation
             bindPreferenceSummaryToValue(findPreference("example_list"));
-            bindPreferenceSummaryToValue(findPreference("example_list2"));
+            //bindPreferenceSummaryToValue(findPreference("example_list2"));
             bindPreferenceSummaryToValue(findPreference("example_list3"));
+
         }
 
         @Override
@@ -183,6 +184,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+
     }
 
     /**
@@ -208,7 +210,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             }
             return super.onOptionsItemSelected(item);
@@ -216,13 +217,5 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     }
 
 
-    public void getColourBlindMode(){
-        ListPreference listPreference = (ListPreference) findPreference("example_list2");
-        String selectedValue = listPreference.getValue();
-        if (selectedValue.equals("0")){
-            PinViewFragment.colourBlindMode = true;
-        } else {
-            PinViewFragment.colourBlindMode = false;
-        }
-    }
+
 }
