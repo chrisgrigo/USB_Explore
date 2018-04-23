@@ -263,7 +263,7 @@ public class PinViewFragment extends Fragment {
 
 
         final String PREFS_NAME = "pref_general";
-        int index = PREFS_NAME.indexOf(2);
+        int index = PREFS_NAME.indexOf(10);
         System.out.println("TESTING " + index);
 
         colourBlindMode = false;
@@ -292,7 +292,7 @@ public class PinViewFragment extends Fragment {
         mapView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         mapView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
         mapView.setDoubleTapZoomStyle(SubsamplingScaleImageView.ZOOM_FOCUS_CENTER);
-        mapView.setMinimumDpi(600); // sets how zoomed in the user can go
+        mapView.setMinimumDpi(800); // sets how zoomed in the user can go
     }
 
     public void buttonSetup() {
