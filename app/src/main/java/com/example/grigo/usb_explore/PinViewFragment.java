@@ -262,8 +262,9 @@ public class PinViewFragment extends Fragment {
 
 
 
-
-
+        final String PREFS_NAME = "pref_general";
+        int index = PREFS_NAME.indexOf(2);
+        System.out.println("TESTING " + index);
 
         colourBlindMode = false;
 
@@ -273,7 +274,7 @@ public class PinViewFragment extends Fragment {
 
 
 
-        
+
 
 
         // colour blind mode (or not) setup
