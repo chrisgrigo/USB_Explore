@@ -57,9 +57,8 @@ public class MapActivity extends AbstractFragmentsActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, HomePageActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        // temporary solution to fix the directions not being drawn
+        System.exit(0);
     }
 
 
