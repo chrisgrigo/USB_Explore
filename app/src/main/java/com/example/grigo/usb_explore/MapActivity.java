@@ -28,6 +28,8 @@ public class MapActivity extends AbstractFragmentsActivity {
 
     public static List<Floor> floorList = new ArrayList<>();
     public static ListGraph roomMap = new ListGraph();
+    static boolean isSetup = false;
+
 
     public MapActivity() {
         super(abstract_fragments_activity);
@@ -49,18 +51,12 @@ public class MapActivity extends AbstractFragmentsActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        floorSetup();
 
-
-
+        if (!isSetup) {
+            floorSetup();
+            isSetup = true;
+        }
     }
-
-    @Override
-    public void onBackPressed() {
-        // temporary solution to fix the directions not being drawn
-        System.exit(0);
-    }
-
 
     public void floorSetup() {
         floorList.add(new Floor(0, "floor0.jpg"));

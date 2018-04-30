@@ -77,8 +77,8 @@ public class PinViewFragment extends Fragment {
     Button btnFloor6;
 
     private String jsonString = "";
-    static String roomNo = "";
-    static int level = -1;
+    static String roomNo;
+    static int level;
 
     PopupWindow popup;
 
@@ -102,19 +102,18 @@ public class PinViewFragment extends Fragment {
         try {
             roomNo = getActivity().getIntent().getStringExtra("ROOM_NUMBER");
             level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
-            btnCancelDirectionsTo.performClick();
 
             floorNum = 0;
             updateMap();
 
-            if (level != -1){
-                setPinNoIdx(roomNo, level);
+            if (navigationModeEnabled) {
+                btnCancelDirectionsTo.performClick();
             }
+
+            setPinNoIdx(roomNo, level);
 
             getActivity().getIntent().removeExtra("ROOM_NUMBER");
             getActivity().getIntent().removeExtra("LEVEL");
-            roomNo = "";
-            level = -1;
             updateMap();
 
         } catch (Exception e){

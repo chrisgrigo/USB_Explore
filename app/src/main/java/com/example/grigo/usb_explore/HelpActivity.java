@@ -75,8 +75,7 @@ public class HelpActivity extends AppCompatActivity {
                 "\"Where can i find information about different rooms?\" \r\n " +
                 "\"Navigate to the map via the home page, and click on any room on the map. Information about the selected room will pop up.\"\r\n\n" +
                 "\"Currently known issues\" \r\n " +
-                "- Directions stop working if the user returns to the homepage. The current solution is to do a hard reset of the application. We are " +
-                        "looking into this. \n- The \"lift only\" mode for disabled users has not been implemented. \nWe hope to add this as soon " +
+                "- The \"lift only\" mode for disabled users has not been implemented. \nWe hope to add this as soon " +
                         "as possible. Please check back for future updates.\r\n"
         );
         termsList2.add("Terms and conditions, as may be amended from time to time, \n" +
