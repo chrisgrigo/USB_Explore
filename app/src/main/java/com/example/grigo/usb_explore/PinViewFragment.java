@@ -1,5 +1,6 @@
 package com.example.grigo.usb_explore;
 
+import android.content.Intent;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -68,6 +69,7 @@ public class PinViewFragment extends Fragment {
     static boolean colourBlindMode;
 
     Button btnColourBlindMode;
+    Button btnSearch;
     Button btnFloor0;
     Button btnFloor1;
     Button btnFloor2;
@@ -344,6 +346,14 @@ public class PinViewFragment extends Fragment {
         btnColourBlindMode.setOnClickListener((View view) -> {
             colourBlindMode = !colourBlindMode;
             updateMap();
+        });
+
+        // button to search
+        btnSearch = rootView.findViewById(id.btnSearch);
+        btnSearch.setOnClickListener((View view) -> {
+            getActivity().finish();
+            Intent intent = new Intent(getActivity(), search.class);
+            startActivity(intent);
         });
 
 

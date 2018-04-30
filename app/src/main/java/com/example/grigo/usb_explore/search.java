@@ -1,6 +1,7 @@
 package com.example.grigo.usb_explore;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -48,7 +49,7 @@ public class search extends AppCompatActivity{
         setContentView(R.layout.activity_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Staff/Room Search");
         SearchView search = findViewById(R.id.searchView);
         final ListView listView = findViewById(R.id.list_view);
@@ -135,10 +136,9 @@ public class search extends AppCompatActivity{
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 intent.putExtra("ROOM_NUMBER", roomNo);
                 intent.putExtra("LEVEL", level);
+                finish();
                 startActivity(intent);
             }
         });
-
     }
-
 }

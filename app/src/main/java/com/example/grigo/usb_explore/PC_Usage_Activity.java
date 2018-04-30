@@ -147,6 +147,7 @@ public class PC_Usage_Activity extends AppCompatActivity {
                     Intent intent = new Intent(getBaseContext(), MapActivity.class);
                     intent.putExtra("ROOM_NUMBER", roomNo);
                     intent.putExtra("LEVEL", level);
+                    finish();
                     startActivity(intent); // start map activity and give it room number and level via intent
                     return false;
                 }
