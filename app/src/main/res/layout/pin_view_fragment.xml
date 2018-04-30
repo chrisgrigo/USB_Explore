@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/fill">
 
-    <com.example.grigo.usb_explore.PinView style="@style/mainPanel" android:id="@+id/mapView"/>
+    <com.example.grigo.usb_explore.PinView style="@style/mainPanel" android:id="@+id/mapView"
+        android:layout_marginTop="55dp" android:layout_marginBottom="8dp"/>
 
     <android.widget.Toolbar
         android:id="@+id/map_toolbar"
@@ -10,8 +11,18 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#b3e5fc"
         android:elevation="4dp"
-        android:title="Floor Maps"
-         />
+        android:title="Floor Maps" >
+
+
+        <Button
+            android:id="@+id/btnColourBlindMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="200dp"
+            android:text="CB Mode" />
+
+    </android.widget.Toolbar>
 
 
     <Button
@@ -155,15 +166,5 @@
         android:layout_marginEnd="-4dp"
         android:layout_marginBottom="130dp"
         app:srcCompat="@drawable/key" />
-
-    <Button
-        android:id="@+id/btnColourBlindMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/map_toolbar"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="3dp"
-        android:text="CB Mode" />
 
 </RelativeLayout>
