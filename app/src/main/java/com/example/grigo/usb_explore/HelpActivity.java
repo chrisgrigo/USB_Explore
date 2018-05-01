@@ -82,7 +82,7 @@ public class HelpActivity extends AppCompatActivity {
         "apply to all of our services. By accessing our application you acknowledge and agree with our Terms and Conditions. \n" +
         "As our application is uploaded to Google Play it follows that user should have read and agree with Google Play Terms of Service: \n" +
                 "https://play.google.com/intl/en-us_us/about/play-terms.html\n");
-        aboutList2.add("This application was made by a second year computer  \nscience team as part of the course. \n\n Version 1.1 \n30/04/2018\n\n\n");
+        aboutList2.add("This application was made by a second year computer  \nscience team as part of the course. \n\n Version 1.1.1 \n01/05/2018\n\n\n");
 
         listHash_Help2.put(listDataHeader_Help2.get(0),faqList2);
         listHash_Help2.put(listDataHeader_Help2.get(1),termsList2);

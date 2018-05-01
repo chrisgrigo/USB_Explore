@@ -38,6 +38,7 @@ public class search extends AppCompatActivity{
         ArrayAdapter arrayAdapter;
         String roomNo = "";
         String level = "";
+        Boolean notFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,8 @@ public class search extends AppCompatActivity{
                                 roomNo = dataSnapshot.child(Integer.toString(i)).child("Room Number").getValue(String.class);
                                 String title = dataSnapshot.child(Integer.toString(i)).child("Title").getValue(String.class);
                                 level = dataSnapshot.child(Integer.toString(i)).child("Level").getValue(String.class);
+
+                                notFound = false;
                                 // Use if statements to check if theres any matches for last name
                                 if (lastName.equalsIgnoreCase(message)) {
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
@@ -107,9 +110,11 @@ public class search extends AppCompatActivity{
                                     list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
                                     count = count + 1;
                                     break;
+                                } else {
+                                    notFound = true;
                                 }
                             } catch (Exception e) { //if not found
-                                list[0] = "Staff Member or Room not found!";
+                                list[0] = "Staff member or room not found!";
                             }
                         }
                         // display the new data using a new array adapter
@@ -131,8 +136,9 @@ public class search extends AppCompatActivity{
         // create on click listener for list elements
         listView.setOnItemClickListener((parent, view, position, id) -> {
             // if both room number and level aren't empty strings
-            if ((!(roomNo.equals(""))) && (!(level.equals("")))){
+            if ((!(roomNo.equals(""))) && (!(level.equals(""))) && !notFound){
                 // put them in the intent and start the map activity
+                notFound = false;
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 intent.putExtra("ROOM_NUMBER", roomNo);
                 intent.putExtra("LEVEL", level);
