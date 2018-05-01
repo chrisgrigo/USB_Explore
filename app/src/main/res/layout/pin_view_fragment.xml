@@ -21,7 +21,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="150dp"
             android:background="#b3e5fc"
-            android:textSize="14sp"
+            android:textSize="12sp"
             style="?android:attr/borderlessButtonStyle"
             android:text="CB Mode" />
 

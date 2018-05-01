@@ -34,12 +34,14 @@ public class search extends AppCompatActivity{
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbr = database.getInstance().getReference();
         String message;
-        int numberOfRooms = 43;
+        //int numberOfRooms = 43;
+        int numberOfRooms = 106;
         String[] list = new String[numberOfRooms];
         ArrayAdapter arrayAdapter;
         String roomNo = "";
         String level = "";
         Boolean notFound;
+        int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,7 @@ public class search extends AppCompatActivity{
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // for each room
-                        int count = 0;
+                        count = 0;
                         for (int i = 0; i < numberOfRooms; i++) {
                             try {
                                 // get data from firebase database
@@ -87,29 +89,23 @@ public class search extends AppCompatActivity{
                                 level = dataSnapshot.child(Integer.toString(i)).child("Level").getValue(String.class);
 
                                 notFound = false;
-                                // Use if statements to check if theres any matches for last name
-                                if (lastName.equalsIgnoreCase(message)) {
-                                    list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                    count = count + 1;
+
+                                System.out.println(roomNo.equalsIgnoreCase(message));
+                                // Use if statements to check if there's any matches for last name
+                                if (roomNo.equalsIgnoreCase(message)){ // room number check
+                                    addToList(title, firstName, lastName);
+                                    break;
+                                } else if (lastName.equalsIgnoreCase(message)) {
+                                    addToList(title, firstName, lastName);
                                     break;
                                 } else if (firstName.equalsIgnoreCase(message)){ // first name check
-                                    list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                    count = count + 1;
-                                    break;
-                                } else if (roomNo.equalsIgnoreCase(message)){ // room number check
-                                    if (roomNo.equals("null")){
-                                        list[count] = (title + " " + firstName + " " + lastName + "'s room is on level " + level + "\n");
-                                    }
-                                    list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                    count = count + 1;
+                                    addToList(title, firstName, lastName);
                                     break;
                                 } else if ((firstName + " " + lastName).equalsIgnoreCase(message)){ // first and last name check
-                                    list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                    count = count + 1;
+                                    addToList(title, firstName, lastName);
                                     break;
                                 } else if ((title + " " + firstName + " " + lastName).equalsIgnoreCase(message)){ // full name including title check
-                                    list[count] = (title + " " + firstName + " " + lastName + "'s room is: " + roomNo + "\n");
-                                    count = count + 1;
+                                    addToList(title, firstName, lastName);
                                     break;
                                 } else {
                                     notFound = true;
@@ -137,7 +133,7 @@ public class search extends AppCompatActivity{
         // create on click listener for list elements
         listView.setOnItemClickListener((parent, view, position, id) -> {
             // if both room number and level aren't empty strings
-            if ((!(roomNo.equals(""))) && (!(level.equals(""))) && !notFound){
+            if ((!(roomNo == null)) && (!(level.equals(""))) && !notFound){
                 // put them in the intent and start the map activity
                 notFound = false;
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
@@ -155,7 +151,6 @@ public class search extends AppCompatActivity{
         try {
             mapActivity = Integer.parseInt(getIntent().getStringExtra("MapActivity"));
             getIntent().removeExtra("MapActivity");
-            System.out.println("HEHRHEHRHEHEHRHEHEHEHEHRHRHEHEHHREH " + mapActivity);
         } catch (Exception e) {
         }
 
@@ -166,5 +161,16 @@ public class search extends AppCompatActivity{
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void addToList(String title, String firstName, String lastName) {
+        if (roomNo == null) {
+            list[count] = (title + " " + firstName + " " + lastName + "\n");
+        } else if (title == null && firstName == null && lastName == null) {
+            list[count] = (" " + roomNo + "          " + "Floor " + level + "\n");
+        } else {
+            list[count] = (" " + roomNo + "          " + title + " " + firstName + " " + lastName + "\n");
+        }
+        count = count + 1;
     }
 }

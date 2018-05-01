@@ -31,7 +31,7 @@ import java.util.List;
  * Created by grigo on 27-Feb-18.
  */
 
-public class PC_Usage_Activity extends AppCompatActivity {
+public class PCUsageActivity extends AppCompatActivity {
     //create initial views and lists
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;

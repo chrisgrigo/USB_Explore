@@ -68,7 +68,7 @@ public class HomePageActivity extends AppCompatActivity
         venue_availability.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), PC_Usage_Activity.class);
+                Intent intent = new Intent(getApplicationContext(), PCUsageActivity.class);
                 startActivity(intent);
             }}
         );

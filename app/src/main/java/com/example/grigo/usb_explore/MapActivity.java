@@ -84,7 +84,7 @@ public class MapActivity extends AbstractFragmentsActivity {
         Node entrance = new Node(new Coord(2378, 1914), 0);
         floorList.get(0).addRoom(new Room("Entrance", new Coord(2215, 1805), new Coord(2752, 2325), new Coord(2485, 2067), entrance));
         Node reception0 = new Node(new Coord(3002, 1441), 0);
-        floorList.get(0).addRoom(new Room("Reception", new Coord(2862, 1336), new Coord(3168, 1412), new Coord(3011, 1340), reception0));
+        floorList.get(0).addRoom(new Room("Front Desk", new Coord(2862, 1336), new Coord(3168, 1412), new Coord(3011, 1340), reception0));
         Node snackBar = new Node(new Coord(3277, 926), 0);
         floorList.get(0).addRoom(new Room("Snack Bar", new Coord(3161, 718), new Coord(3460, 898), new Coord(3301, 713), snackBar));
 

@@ -1,6 +1,7 @@
 package com.example.grigo.usb_explore;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -105,7 +106,10 @@ public class PinViewFragment extends Fragment {
             roomNo = getActivity().getIntent().getStringExtra("ROOM_NUMBER");
             level = Integer.parseInt(getActivity().getIntent().getStringExtra("LEVEL"));
 
-            floorNum = 0;
+            floorNum = level - 1;
+                if (floorNum == -1) {
+                    floorNum = 1;
+                }
             updateMap();
 
             if (navigationModeEnabled) {

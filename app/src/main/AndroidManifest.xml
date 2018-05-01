@@ -27,7 +27,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.grigo.usb_explore.HomePageActivity" />
         </activity>
-        <activity android:name=".PC_Usage_Activity"
+        <activity android:name=".PCUsageActivity"
                     android:parentActivityName=".HomePageActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
