@@ -88,7 +88,13 @@ public class PinView extends SubsamplingScaleImageView {
 
         paint.setAntiAlias(true);
         paintLine.setAntiAlias(true);
-        paintLine.setColor(Color.parseColor("#0088FD"));
+
+        if (PinViewFragment.colourBlindMode) {
+            paintLine.setColor(Color.parseColor("#F70A32"));
+        } else {
+            paintLine.setColor(Color.parseColor("#0088FD"));
+        }
+
         paintLine.setStyle(Paint.Style.STROKE);
         paintLine.setStrokeWidth(15);
         paintLine.setPathEffect(dashPathEffect);

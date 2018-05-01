@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -146,5 +147,24 @@ public class search extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        int mapActivity = 0;
+        try {
+            mapActivity = Integer.parseInt(getIntent().getStringExtra("MapActivity"));
+            getIntent().removeExtra("MapActivity");
+            System.out.println("HEHRHEHRHEHEHRHEHEHEHEHRHRHEHEHHREH " + mapActivity);
+        } catch (Exception e) {
+        }
+
+        if (mapActivity == 1) {
+            Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+            finish();
+            startActivity(intent);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

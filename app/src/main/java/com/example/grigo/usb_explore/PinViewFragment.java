@@ -314,7 +314,9 @@ public class PinViewFragment extends Fragment {
         btnCancelDirectionsTo = rootView.findViewById(id.btnCancelDirectionsTo);
         btnCancelDirectionsTo.setOnClickListener((View view) -> {
 
+
             if (navigationModeEnabled) {
+
                 mapView.removePin("PIN FROM");
                 btnDirectionsTo.setVisibility(View.INVISIBLE);
                 // resets details for when floor is changed
@@ -338,6 +340,8 @@ public class PinViewFragment extends Fragment {
             if (floorNum != pinFromFloorNum & pinFromFloorNum != -1) {
                 floorNum = pinFromFloorNum;
                 updateMap();
+            } else {
+                mapView.setScaleAndCenter(mapView.getScale(), mapView.getCenter()); // method allows onDraw to be called without the need of updateMap method
             }
         });
 
@@ -353,6 +357,7 @@ public class PinViewFragment extends Fragment {
         btnSearch.setOnClickListener((View view) -> {
             getActivity().finish();
             Intent intent = new Intent(getActivity(), search.class);
+            intent.putExtra("MapActivity", "1");
             startActivity(intent);
         });
 
