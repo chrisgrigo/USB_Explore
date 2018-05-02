@@ -99,7 +99,7 @@ public class MapActivity extends AbstractFragmentsActivity {
         Node r1025b = new Node(new Coord(1150, 533), 1);
         floorList.get(1).addRoom(new Room("1.025B", new Coord(1047, 200), new Coord(1257, 500), new Coord(1145, 285), r1025b));
         Node r1043 = new Node(new Coord(2547, 908), 1);
-        floorList.get(1).addRoom(new Room("Open Lab 1.043", new Coord(1812, 200), new Coord(4074, 875), new Coord(2533, 482), r1043));
+        floorList.get(1).addRoom(new Room("1.043", new Coord(1812, 200), new Coord(4074, 875), new Coord(2533, 482), r1043));
 
         Node r2004 = new Node(new Coord(1005, 2996), 2);
         floorList.get(2).addRoom(new Room("2.004", new Coord(741, 2843), new Coord(998, 3190), new Coord(868, 2982), r2004));
