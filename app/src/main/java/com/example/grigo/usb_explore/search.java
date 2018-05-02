@@ -69,6 +69,7 @@ public class search extends AppCompatActivity{
         search.onActionViewExpanded();
         search.setIconified(false);
         search.clearFocus();
+
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // upon search submit
             @Override
@@ -133,7 +134,7 @@ public class search extends AppCompatActivity{
         // create on click listener for list elements
         listView.setOnItemClickListener((parent, view, position, id) -> {
             // if both room number and level aren't empty strings
-            if ((!(roomNo == null)) && (!(level.equals(""))) && !notFound){
+            if ((!(roomNo.equals(""))) && (!(level.equals(""))) && !notFound){
                 // put them in the intent and start the map activity
                 notFound = false;
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
@@ -164,10 +165,10 @@ public class search extends AppCompatActivity{
     }
 
     public void addToList(String title, String firstName, String lastName) {
-        if (roomNo == null) {
-            list[count] = (title + " " + firstName + " " + lastName + "\n");
+        if (roomNo.equals("")) {
+            list[count] = (title + " " + firstName + " " + lastName + " does not have a room" + "\n");
         } else if (title == null && firstName == null && lastName == null) {
-            list[count] = (" " + roomNo + "          " + "Floor " + level + "\n");
+            list[count] = (" " + roomNo + " (Floor " + level + ")" + "\n");
         } else {
             list[count] = (" " + roomNo + "          " + title + " " + firstName + " " + lastName + "\n");
         }

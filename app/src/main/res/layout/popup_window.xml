@@ -13,6 +13,7 @@
         android:gravity="center"
         android:text="Send us your feedback/issues"
         android:textStyle="normal"
+        android:textColor="@color/black"
         android:textAllCaps="false"
         android:textSize="19sp" />
 
