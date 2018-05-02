@@ -83,7 +83,7 @@ public class PinViewFragment extends Fragment {
     static String roomNo;
     static int level;
 
-    PopupWindow popup;
+    static PopupWindow popup;
 
 
     @Override
@@ -519,7 +519,6 @@ public class PinViewFragment extends Fragment {
     }
 
     public void updateMap() {
-
         try {
             popup.dismiss();
         } catch (Exception ex) {}
