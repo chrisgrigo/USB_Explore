@@ -27,7 +27,7 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 public class HomePageActivity extends AppCompatActivity
         implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
-    SliderLayout sliderLayout ;
+    SliderLayout sliderLayout;
     ImageButton floor_maps;
     ImageButton staff_search;
     ImageButton venue_availability;
