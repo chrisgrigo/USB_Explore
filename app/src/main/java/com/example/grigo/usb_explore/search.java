@@ -1,7 +1,10 @@
 package com.example.grigo.usb_explore;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -77,6 +80,11 @@ public class search extends AppCompatActivity{
             @Override
             public boolean onQueryTextSubmit(String query) {
                 message = query;
+
+                if (!isNetworkAvailable()) {
+                    list[0] = (" Please check your internet connection!");
+                }
+
                 dbr.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -115,7 +123,7 @@ public class search extends AppCompatActivity{
                                     notFound = true;
                                 }
                             } catch (Exception e) { //if not found
-                                list[0] = "Staff member or room not found!";
+                                list[0] = " Staff member or room not found!";
                                 notFound = true;
                             }
                         }
@@ -124,19 +132,9 @@ public class search extends AppCompatActivity{
                         listView.setAdapter(arrayAdapter2);
                     }
                     public void onCancelled(DatabaseError er){ // if there's a database error - likely connection failure
-                        list[0] = ("Please check your internet connection!");
+                        //list[0] = (" Please check your internet connection!");
                     }
                 });
-
-                if (!notFound) {
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            list[0] = ("Please check your internet connection!");
-                        }
-                    }, 2000);
-                }
                 return false;
             }
 
@@ -188,5 +186,12 @@ public class search extends AppCompatActivity{
             list[count] = (" " + roomNo + "          " + title + " " + firstName + " " + lastName + "\n");
         }
         count = count + 1;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
