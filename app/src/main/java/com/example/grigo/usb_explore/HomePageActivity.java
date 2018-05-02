@@ -1,12 +1,18 @@
 package com.example.grigo.usb_explore;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -30,6 +36,9 @@ public class HomePageActivity extends AppCompatActivity
 
     HashMap<String, Integer> HashMapForLocalRes ;
     ImageButton floormaps, staffsearch, venue, findapc;
+
+    //String requiredSSID = "ASK4 Wireless"; // testing
+    String requiredSSID = "newcastle-university";
 
 
     @Override
@@ -69,8 +78,16 @@ public class HomePageActivity extends AppCompatActivity
         venue_availability.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), PCUsageActivity.class);
-                startActivity(intent);
+                if (getSSID(getApplicationContext()).equals(requiredSSID)) {
+                    Intent intent = new Intent(getApplicationContext(), PCUsageActivity.class);
+                    intent.putExtra("RESET", "1");
+                    startActivity(intent);
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Not connected to the " + requiredSSID + " network", Toast.LENGTH_LONG);
+                    TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
+                    textView.setGravity(Gravity.CENTER);
+                    toast.show();
+                }
             }}
         );
 
@@ -161,5 +178,18 @@ public class HomePageActivity extends AppCompatActivity
         HashMapForLocalRes.put("Inside USB", R.drawable.slide2);
         HashMapForLocalRes.put("USB 4th Floor Balcony", R.drawable.slide3);
 
+    }
+
+    public String getSSID(Context context) {
+        String ssid = "none";
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+
+        if (WifiInfo.getDetailedStateOf(wifiInfo.getSupplicantState()) == NetworkInfo.DetailedState.CONNECTED
+                || WifiInfo.getDetailedStateOf(wifiInfo.getSupplicantState()) == NetworkInfo.DetailedState.OBTAINING_IPADDR) {
+            ssid = wifiInfo.getSSID();
+        }
+        ssid = ssid.replace("\"", "");
+        return ssid;
     }
 }

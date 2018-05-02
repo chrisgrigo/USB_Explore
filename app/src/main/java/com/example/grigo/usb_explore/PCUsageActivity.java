@@ -181,7 +181,4 @@ public class PCUsageActivity extends AppCompatActivity {
         }
 
     }
-
-
-
 }

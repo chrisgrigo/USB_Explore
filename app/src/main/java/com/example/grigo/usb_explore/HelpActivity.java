@@ -38,6 +38,9 @@ public class HelpActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listHash_Help, listHash_Help2;
     private ArrayList<String> feedbackList1, faqList2, termsList2,aboutList2;
 
+    String versionNumber = "1.2.3";
+    String versionDate = "02/05/2018";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +85,7 @@ public class HelpActivity extends AppCompatActivity {
         "apply to all of our services. By accessing our application you acknowledge and agree with our Terms and Conditions. \n" +
         "As our application is uploaded to Google Play it follows that user should have read and agree with Google Play Terms of Service: \n" +
                 "https://play.google.com/intl/en-us_us/about/play-terms.html\n");
-        aboutList2.add("This application was made by a second year computer  \nscience team as part of the course. \n\nVersion 1.2.2 \n02/05/2018\n\n\n");
+        aboutList2.add("This application was made by a second year computer  \nscience team as part of the course. \n\nVersion " + versionNumber + " \n" + versionDate + "\n\n\n");
 
         listHash_Help2.put(listDataHeader_Help2.get(0),faqList2);
         listHash_Help2.put(listDataHeader_Help2.get(1),termsList2);
