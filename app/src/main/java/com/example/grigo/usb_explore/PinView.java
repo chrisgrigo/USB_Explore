@@ -49,6 +49,7 @@ public class PinView extends SubsamplingScaleImageView {
     public boolean setPin(PointF pin, String pinName) {
         System.out.println("PIN ATTEMPTED TO BE DROPPED");
         if (!pinF.contains(pin)) {
+            System.out.println("ADDING PIN");
             if (pinNames.contains(pinName)) {
                 removePin(pinName);
             }

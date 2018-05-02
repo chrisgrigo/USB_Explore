@@ -102,7 +102,6 @@ public class search extends AppCompatActivity{
 
                                 notFound = false;
 
-                                System.out.println(roomNo.equalsIgnoreCase(message));
                                 // Use if statements to check if there's any matches for last name
                                 if (roomNo.equalsIgnoreCase(message)){ // room number check
                                     addToList(title, firstName, lastName);
