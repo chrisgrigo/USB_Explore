@@ -189,7 +189,7 @@ public class HomePageActivity extends AppCompatActivity
                 || WifiInfo.getDetailedStateOf(wifiInfo.getSupplicantState()) == NetworkInfo.DetailedState.OBTAINING_IPADDR) {
             ssid = wifiInfo.getSSID();
         }
-        ssid = ssid.replace("\"", "");
+        ssid = ssid.substring(1, ssid.length()-1);
         return ssid;
     }
 }

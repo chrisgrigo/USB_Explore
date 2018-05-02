@@ -123,7 +123,7 @@ public class MapActivity extends AbstractFragmentsActivity {
         floorList.get(2).addRoom(new Room("2.026", new Coord(1470, 753), new Coord(1742, 870), new Coord(1605, 761), r2026));
         Node r2027 = new Node(new Coord(1434, 687), 2);
         floorList.get(2).addRoom(new Room("2.027", new Coord(1475, 622), new Coord(1746, 739), new Coord(1601, 635), r2027));
-        Node r2038 = new Node(new Coord(2624, 564), 2);
+        Node r2038 = new Node(new Coord(2624, 572), 2);
         floorList.get(2).addRoom(new Room("2.038", new Coord(1817, 407), new Coord(3374, 505), new Coord(2656, 420), r2038));
         Node r2039 = new Node(new Coord(1889, 429), 2);
         floorList.get(2).addRoom(new Room("2.039", new Coord(1812, 200), new Coord(1979, 400), new Coord(1889, 200), r2039));
@@ -143,7 +143,7 @@ public class MapActivity extends AbstractFragmentsActivity {
         floorList.get(2).addRoom(new Room("2.046", new Coord(3036, 200), new Coord(3203, 400), new Coord(3108, 200), r2046));
         Node r2047 = new Node(new Coord(3275, 429), 2);
         floorList.get(2).addRoom(new Room("2.047", new Coord(3212, 200), new Coord(3375, 400), new Coord(3275, 200), r2047));
-        Node r2048 = new Node(new Coord(2624, 564), 2);
+        Node r2048 = new Node(new Coord(2624, 572), 2);
         floorList.get(2).addRoom(new Room("2.048", new Coord(2692, 517), new Coord(4503, 901), new Coord(3317, 607), r2048));
         Node r2060 = new Node(new Coord(3874, 979), 2);
         floorList.get(2).addRoom(new Room("2.060", new Coord(3524, 928), new Coord(3890, 1257), new Coord(3704, 1040), r2060));
@@ -433,7 +433,7 @@ public class MapActivity extends AbstractFragmentsActivity {
         floorList.get(2).addNode(p215);
         Node p216 = new Node(new Coord(1397, 687), 2);
         floorList.get(2).addNode(p216);
-        Node p217 = new Node(new Coord(1397, 632), 2);
+        Node p217 = new Node(new Coord(1397, 587), 2);
         floorList.get(2).addNode(p217);
         Node p218 = new Node(new Coord(1397, 572), 2);
         floorList.get(2).addNode(p218);
@@ -726,6 +726,11 @@ public class MapActivity extends AbstractFragmentsActivity {
         roomMap.addEdge(r2039, p222);
         roomMap.addEdge(r2040, p223);
         roomMap.addEdge(r2041, p224);
+
+        // fixes for room 2.038
+        //roomMap.addEdge(r2038, p224);
+        roomMap.addEdge(r2038, p220);
+
         roomMap.addEdge(r2042, p225);
         roomMap.addEdge(r2043, p226);
         roomMap.addEdge(r2044, p227);
@@ -752,7 +757,10 @@ public class MapActivity extends AbstractFragmentsActivity {
         roomMap.addEdge(p217, p218);
         roomMap.addEdge(p217, p219);
         roomMap.addEdge(p218, p220);
+
+        // fixes for room 2.038
         roomMap.addEdge(p220, p224);
+
         roomMap.addEdge(p222, p223);
         roomMap.addEdge(p223, p224);
         roomMap.addEdge(p224, p225);

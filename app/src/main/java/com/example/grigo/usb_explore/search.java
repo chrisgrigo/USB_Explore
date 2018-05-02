@@ -3,6 +3,7 @@ package com.example.grigo.usb_explore;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
+import java.util.logging.LogRecord;
 
 /**
  * Created by Tanmoy on 18/10/2017.
@@ -40,7 +42,7 @@ public class search extends AppCompatActivity{
         ArrayAdapter arrayAdapter;
         String roomNo = "";
         String level = "";
-        Boolean notFound;
+        Boolean notFound = false;
         int count;
 
     @Override
@@ -78,6 +80,7 @@ public class search extends AppCompatActivity{
                 dbr.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
                         // for each room
                         count = 0;
                         for (int i = 0; i < numberOfRooms; i++) {
@@ -113,6 +116,7 @@ public class search extends AppCompatActivity{
                                 }
                             } catch (Exception e) { //if not found
                                 list[0] = "Staff member or room not found!";
+                                notFound = true;
                             }
                         }
                         // display the new data using a new array adapter
@@ -120,9 +124,19 @@ public class search extends AppCompatActivity{
                         listView.setAdapter(arrayAdapter2);
                     }
                     public void onCancelled(DatabaseError er){ // if there's a database error - likely connection failure
-                        list[0] = ("No internet connection available!");
+                        list[0] = ("Please check your internet connection!");
                     }
                 });
+
+                if (!notFound) {
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            list[0] = ("Please check your internet connection!");
+                        }
+                    }, 2000);
+                }
                 return false;
             }
 
