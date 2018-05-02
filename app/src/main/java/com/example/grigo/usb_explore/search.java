@@ -82,7 +82,7 @@ public class search extends AppCompatActivity{
                 message = query;
 
                 if (!isNetworkAvailable()) {
-                    list[0] = (" Please check your internet connection!");
+                    list[0] = (" Please check your internet connection");
                 }
 
                 dbr.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -123,7 +123,7 @@ public class search extends AppCompatActivity{
                                     notFound = true;
                                 }
                             } catch (Exception e) { //if not found
-                                list[0] = " Staff member or room not found!";
+                                list[0] = " Staff member or room not found";
                                 notFound = true;
                             }
                         }
@@ -132,7 +132,7 @@ public class search extends AppCompatActivity{
                         listView.setAdapter(arrayAdapter2);
                     }
                     public void onCancelled(DatabaseError er){ // if there's a database error - likely connection failure
-                        //list[0] = (" Please check your internet connection!");
+                        //list[0] = (" Please check your internet connection");
                     }
                 });
                 return false;
