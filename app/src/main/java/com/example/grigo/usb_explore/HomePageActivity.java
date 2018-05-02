@@ -53,6 +53,7 @@ public class HomePageActivity extends AppCompatActivity
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtra("RESET", "1");
                 startActivity(intent);
             }}
         );

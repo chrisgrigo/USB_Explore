@@ -274,8 +274,19 @@ public class PinViewFragment extends Fragment {
         }
         keyImage.setImageDrawable(draw);
 
+        int reset = 0;
+        try {
+             reset = Integer.parseInt(getActivity().getIntent().getStringExtra("RESET"));
+             getActivity().getIntent().removeExtra("RESET");
+        } catch (Exception e) {}
 
-        mapView.setScaleAndCenter(mapScale, mapCentre); // ensures that scaling is constant across floors
+        if (reset == 1) {
+            mapView.setScaleAndCenter((float)0.0, null);
+        } else {
+            mapView.setScaleAndCenter(mapScale, mapCentre); // ensures that scaling is constant across floors
+        }
+
+
         mapView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_INSIDE);
         mapView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
         mapView.setDoubleTapZoomStyle(SubsamplingScaleImageView.ZOOM_FOCUS_CENTER);

@@ -140,6 +140,7 @@ public class search extends AppCompatActivity{
                 Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                 intent.putExtra("ROOM_NUMBER", roomNo);
                 intent.putExtra("LEVEL", level);
+                intent.putExtra("RESET", "1");
                 finish();
                 startActivity(intent);
             }
