@@ -38,7 +38,7 @@ public class HelpActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listHash_Help, listHash_Help2;
     private ArrayList<String> feedbackList1, faqList2, termsList2,aboutList2;
 
-    String versionNumber = "1.3.0";
+    String versionNumber = "1.3.1";
     String versionDate = "03/05/2018";
 
     @Override

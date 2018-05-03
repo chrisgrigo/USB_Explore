@@ -7,11 +7,13 @@ import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,8 +47,8 @@ public class PCUsageActivity extends AppCompatActivity {
 
     String JSONString = "";
     // USED FOR TESTING PURPOSES OFF CAMPUS
-    //private static String fileURL = "https://api.myjson.com/bins/qqx1f";
-    private static String fileURL = "https://csi.ncl.ac.uk/usb/?json=y";
+    private static String fileURL = "https://api.myjson.com/bins/qqx1f";
+    //private static String fileURL = "https://csi.ncl.ac.uk/usb/?json=y";
     private final static int REFRESHINTERVAL = 1000 * 60 * 10; //10 minutes
     Handler refreshHandler;
     HandlerThread refreshHandlerThread;
@@ -135,16 +137,30 @@ public class PCUsageActivity extends AppCompatActivity {
                     roomNo = lvl4.get(childpos);
                     break;
                 case 3:
-                    roomNo = lvl4.get(childpos);
+                    roomNo = lvl5.get(childpos);
                     break;
             }
-            String roomNames[] = {"2.014", "3.005", "3.014", "3.015", "3.018", "4.015", "4.020", "4.021", "4.022", "5.011", "5.023"};
+            String roomNames[] = {"2.014", "3.005", "3.014", "3.015", "3.018", "4.015", "4.020", "4.021", "4.022", "5.011", "5.023", "MSc Teaching"};
             for (String rName: roomNames){
                 // get the position of where the string starts
                 int pos = roomNo.indexOf(rName);
                 if (pos != -1){ // if the roomname exists within that string
                     roomNo = roomNo.substring(pos, pos + rName.length()); // create substring
+                    System.out.println(roomNo);
+
                     Intent intent = new Intent(getBaseContext(), MapActivity.class);
+
+                    String notOnMap[] = {"2.014", "3.014", "4.015", "5.011", "5.023", "MSc Teaching"};
+                    for (int i = 0; i < notOnMap.length; i++) {
+                        if (roomNo.equals(notOnMap[i])) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Room exists but is currently not on the map", Toast.LENGTH_LONG);
+                            TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
+                            textView.setGravity(Gravity.CENTER);
+                            toast.show();
+                        }
+                    }
+
                     intent.putExtra("ROOM_NUMBER", roomNo);
                     intent.putExtra("LEVEL", level);
                     finish();
