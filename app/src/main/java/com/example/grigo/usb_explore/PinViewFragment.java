@@ -119,10 +119,9 @@ public class PinViewFragment extends Fragment {
 
             if (!roomNo.equals(pinFromRoomName)) { // prevents duplicate pins when searching
                 setPinNoIdx(roomNo, level);
-            } else {
-                floorNum = level;
             }
 
+            floorNum = level;
             getActivity().getIntent().removeExtra("ROOM_NUMBER");
             getActivity().getIntent().removeExtra("LEVEL");
             updateMap();
