@@ -47,8 +47,8 @@ public class PCUsageActivity extends AppCompatActivity {
 
     String JSONString = "";
     // USED FOR TESTING PURPOSES OFF CAMPUS
-    private static String fileURL = "https://api.myjson.com/bins/qqx1f";
-    //private static String fileURL = "https://csi.ncl.ac.uk/usb/?json=y";
+    //private static String fileURL = "https://api.myjson.com/bins/qqx1f";
+    private static String fileURL = "https://csi.ncl.ac.uk/usb/?json=y";
     private final static int REFRESHINTERVAL = 1000 * 60 * 10; //10 minutes
     Handler refreshHandler;
     HandlerThread refreshHandlerThread;

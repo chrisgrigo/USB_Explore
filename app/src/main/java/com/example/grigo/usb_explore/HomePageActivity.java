@@ -78,8 +78,8 @@ public class HomePageActivity extends AppCompatActivity
         venue_availability.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Boolean hello = true;
-                if (getSSID(getApplicationContext()).equals(requiredSSID) || hello) {
+                
+                if (getSSID(getApplicationContext()).equals(requiredSSID)) {
                     Intent intent = new Intent(getApplicationContext(), PCUsageActivity.class);
                     intent.putExtra("RESET", "1");
                     startActivity(intent);
