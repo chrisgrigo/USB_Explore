@@ -66,13 +66,13 @@ public class MapActivity extends AbstractFragmentsActivity {
     }
 
     public void floorSetup() {
-        floorList.add(new Floor(0, "floor0.jpg"));
-        floorList.add(new Floor(1, "floor1.jpg"));
-        floorList.add(new Floor(2, "floor2.jpg"));
-        floorList.add(new Floor(3, "floor3.jpg"));
-        floorList.add(new Floor(4, "floor4.jpg"));
-        floorList.add(new Floor(5, "floor5.jpg"));
-        floorList.add(new Floor(6, "floor6.jpg"));
+        floorList.add(new Floor(0, "floor0.png"));
+        floorList.add(new Floor(1, "floor1.png"));
+        floorList.add(new Floor(2, "floor2.png"));
+        floorList.add(new Floor(3, "floor3.png"));
+        floorList.add(new Floor(4, "floor4.png"));
+        floorList.add(new Floor(5, "floor5.png"));
+        floorList.add(new Floor(6, "floor6.png"));
 
         nodeSetup();
     }

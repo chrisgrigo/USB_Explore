@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -66,7 +67,7 @@ public class PinViewFragment extends Fragment {
     static int pinToFloorNum = -1; // initiated to an unreachable floor
     static int pinToIdx;
 
-    String[] colourBlindMaps = {"floor0CB.jpg", "floor1CB.jpg","floor2CB.jpg","floor3CB.jpg","floor4CB.jpg","floor5CB.jpg","floor6CB.jpg"};
+    String[] colourBlindMaps = {"floor0CB.png", "floor1CB.png","floor2CB.png","floor3CB.png","floor4CB.png","floor5CB.png","floor6CB.png"};
     static boolean colourBlindMode;
 
     Button btnColourBlindMode;

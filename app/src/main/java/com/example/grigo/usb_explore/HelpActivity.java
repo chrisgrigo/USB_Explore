@@ -38,7 +38,7 @@ public class HelpActivity extends AppCompatActivity {
     private HashMap<String, List<String>> listHash_Help, listHash_Help2;
     private ArrayList<String> feedbackList1, faqList2, termsList2,aboutList2;
 
-    String versionNumber = "1.2.8";
+    String versionNumber = "1.2.9";
     String versionDate = "03/05/2018";
 
     @Override
@@ -49,8 +49,6 @@ public class HelpActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Help");
-
-
 
 
 
