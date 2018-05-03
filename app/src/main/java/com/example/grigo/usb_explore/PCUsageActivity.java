@@ -154,7 +154,7 @@ public class PCUsageActivity extends AppCompatActivity {
                     for (int i = 0; i < notOnMap.length; i++) {
                         if (roomNo.equals(notOnMap[i])) {
 
-                            Toast toast = Toast.makeText(getApplicationContext(), "Room exists but is currently not on the map", Toast.LENGTH_LONG);
+                            Toast toast = Toast.makeText(getApplicationContext(), "Room exists on this floor but is currently not on the map", Toast.LENGTH_LONG);
                             TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
                             textView.setGravity(Gravity.CENTER);
                             toast.show();
