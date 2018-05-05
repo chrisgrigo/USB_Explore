@@ -40,7 +40,7 @@ public class search extends AppCompatActivity{
         DatabaseReference dbr = database.getInstance().getReference();
         String message;
         //int numberOfRooms = 43;
-        int numberOfRooms = 106;
+        int numberOfRooms = 108;
         String[] list = new String[numberOfRooms];
         ArrayAdapter arrayAdapter;
         String roomNo = "";
